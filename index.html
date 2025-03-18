@@ -3,9 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Custom Title</title>  <!-- Change this to your desired title -->
+    <meta name="description" content="A blog about programming, software development, and more.">
+    <title>Programming Blog</title>
+
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Left Sidebar (Fixed) */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .sidebar ul li a:hover {
+            color: #fff;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #fff;
+        }
+
+        .post-item {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+        .post-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            margin-right: 15px;
+        }
+
+        .post-item .content {
+            flex-grow: 1;
+        }
+
+        .post-item h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .post-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .post-item a {
+            color: #0073e6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .post-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-   This is my personal blog
+
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <h3>Topics</h3>
+        <ul>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Software Architecture</a></li>
+            <li><a href="#">Design Patterns</a></li>
+            <li><a href="#">DevOps</a></li>
+            <li><a href="#">Machine Learning</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Post Item 1 -->
+        <div class="post-item">
+            <img src="https://via.placeholder.com/80" alt="Post Image 1">
+            <div class="content">
+                <h2><a href="#">Introduction to Web Development</a></h2>
+                <p>This post will walk you through the basics of web development, covering HTML, CSS, and JavaScript, and how to build a simple website from scratch.</p>
+                <a href="#">Read more...</a>
+            </div>
+        </div>
+
+        <!-- Post Item 2 -->
+        <div class="post-item">
+            <img src="https://via.placeholder.com/80" alt="Post Image 2">
+            <div class="content">
+                <h2><a href="#">Understanding Software Architecture</a></h2>
+                <p>In this post, we explore the fundamental concepts of software architecture, why it's essential for scalable systems, and common architectural patterns.</p>
+                <a href="#">Read more...</a>
+            </div>
+        </div>
+
+        <!-- Post Item 3 -->
+        <div class="post-item">
+            <img src="https://via.placeholder.com/80" alt="Post Image 3">
+            <div class="content">
+                <h2><a href="#">Design Patterns in Programming</a></h2>
+                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
+                <a href="#">Read more...</a>
+            </div>
+        </div>
+
+        <!-- More post items can be added here -->
+    </div>
+
 </body>
 </html>
