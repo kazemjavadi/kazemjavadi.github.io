@@ -13,26 +13,38 @@
             font-family: Arial, sans-serif;
             display: flex;
             min-height: 100vh;
-            background-color: #f4f4f4;
+            background-color: #edede9; /* Set background color to #edede9 */
             color: #333;
+        }
+
+        /* Container to hold both Sidebar and Content */
+        .container {
+            display: flex;
+            flex-grow: 1;
+            padding: 0;
+            width: 100%;
+            background-color: #edede9; /* Background color for the whole page */
         }
 
         /* Left Sidebar (Fixed) */
         .sidebar {
             width: 250px;
-            height: 100vh;
             position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #333;
-            color: white;
-            padding: 20px;
+            top: 20px;
+            left: 20px;
+            bottom: 20px;
+            background-color: #77BFA3; /* Green sidebar background (#77BFA3) */
+            color: #333;
+            padding: 20px 15px;
             box-sizing: border-box;
             overflow-y: auto;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow around the sidebar */
         }
 
         .sidebar h3 {
             margin-top: 0;
+            font-size: 1.5rem;
         }
 
         .sidebar ul {
@@ -45,30 +57,39 @@
         }
 
         .sidebar ul li a {
-            color: #ddd;
+            color: #333;
             text-decoration: none;
             font-size: 1.1rem;
         }
 
         .sidebar ul li a:hover {
-            color: #fff;
+            color: #0073e6;
         }
 
-        /* Main Content */
+        .sidebar ul li ul {
+            padding-left: 20px;
+        }
+
+        .sidebar ul li ul li a {
+            font-size: 1rem;
+        }
+
+        /* Main Content Area */
         .main-content {
-            margin-left: 260px;
+            margin-left: 270px;
             padding: 20px;
             flex-grow: 1;
-            background-color: #fff;
+            background-color: #edede9; /* Ensure background color continues behind the content area */
+            border-radius: 10px;
         }
 
         .post-item {
             display: flex;
-            background-color: #fff;
+            background-color: #ECF7E9; /* Set the post item background color to #ECF7E9 */
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
             padding: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow around each post item */
         }
 
         .post-item img {
@@ -85,6 +106,7 @@
         .post-item h2 {
             margin: 0;
             font-size: 1.5rem;
+            color: #56806A; /* Green color for post title */
         }
 
         .post-item p {
@@ -93,7 +115,7 @@
         }
 
         .post-item a {
-            color: #0073e6;
+            color: #94D1B2; /* Light green color for 'Read More' text */
             text-decoration: none;
             font-weight: bold;
         }
@@ -105,130 +127,134 @@
 </head>
 <body>
 
-    <!-- Left Sidebar -->
-    <div class="sidebar">
-        <h3>Topics</h3>
-        <ul>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Software Architecture</a></li>
-            <li><a href="#">Design Patterns</a></li>
-            <li><a href="#">DevOps</a></li>
-            <li><a href="#">Machine Learning</a></li>
-        </ul>
-    </div>
-
-    <!-- Main Content Area -->
-    <div class="main-content">
-        <!-- Post Item 1 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 1">
-            <div class="content">
-                <h2><a href="#">Introduction to Web Development</a></h2>
-                <p>This post will walk you through the basics of web development, covering HTML, CSS, and JavaScript, and how to build a simple website from scratch.</p>
-                <a href="#">Read more...</a>
-            </div>
+    <!-- Main Container to hold Sidebar and Content -->
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <h3>Topics</h3>
+            <ul>
+                <li><a href="#">Web Development</a>
+                    <ul>
+                        <li><a href="#">HTML & CSS</a></li>
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">React</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Software Architecture</a>
+                    <ul>
+                        <li><a href="#">Microservices</a></li>
+                        <li><a href="#">Monolithic Architecture</a></li>
+                        <li><a href="#">Event-Driven Architecture</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Design Patterns</a>
+                    <ul>
+                        <li><a href="#">Singleton</a></li>
+                        <li><a href="#">Factory</a></li>
+                        <li><a href="#">Observer</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">DevOps</a>
+                    <ul>
+                        <li><a href="#">CI/CD</a></li>
+                        <li><a href="#">Docker & Kubernetes</a></li>
+                        <li><a href="#">Monitoring</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Machine Learning</a>
+                    <ul>
+                        <li><a href="#">Neural Networks</a></li>
+                        <li><a href="#">Deep Learning</a></li>
+                        <li><a href="#">Natural Language Processing</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
 
-        <!-- Post Item 2 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 2">
-            <div class="content">
-                <h2><a href="#">Understanding Software Architecture</a></h2>
-                <p>In this post, we explore the fundamental concepts of software architecture, why it's essential for scalable systems, and common architectural patterns.</p>
-                <a href="#">Read more...</a>
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Post Item 1 -->
+            <div class="post-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 1">
+                <div class="content">
+                    <h2><a href="#">Introduction to Web Development</a></h2>
+                    <p>This post will walk you through the basics of web development, covering HTML, CSS, and JavaScript, and how to build a simple website from scratch.</p>
+                    <a href="#">Read more...</a>
+                </div>
             </div>
-        </div>
 
-        <!-- Post Item 3 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
+            <!-- Post Item 2 -->
+            <div class="post-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 2">
+                <div class="content">
+                    <h2><a href="#">Understanding Software Architecture</a></h2>
+                    <p>In this post, we explore the fundamental concepts of software architecture, why it's essential for scalable systems, and common architectural patterns.</p>
+                    <a href="#">Read more...</a>
+                </div>
             </div>
-        </div>
 
-         <!-- Post Item 4 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
+            <!-- Post Item 3 -->
+            <div class="post-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 3">
+                <div class="content">
+                    <h2><a href="#">Design Patterns in Programming</a></h2>
+                    <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
+                    <a href="#">Read more...</a>
+                </div>
             </div>
-        </div>
 
-         <!-- Post Item 3 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
+            <!-- Post Item 4 -->
+            <div class="post-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 4">
+                <div class="content">
+                    <h2><a href="#">DevOps: Best Practices</a></h2>
+                    <p>Explore the best practices for DevOps, from continuous integration and continuous deployment to automated testing and containerization.</p>
+                    <a href="#">Read more...</a>
+                </div>
             </div>
-        </div>
 
-         <!-- Post Item 3 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
+            <!-- Post Item 5 -->
+            <div class="post-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 5">
+                <div class="content">
+                    <h2><a href="#">Microservices Architecture: A Guide</a></h2>
+                    <p>Learn about Microservices Architecture and why it’s becoming one of the most popular ways of building scalable systems. This post covers the fundamentals.</p>
+                    <a href="#">Read more...</a>
+                </div>
             </div>
-        </div>
 
-         <!-- Post Item 3 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
+            <!-- Post Item 6 -->
+            <div class="post-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 5">
+                <div class="content">
+                    <h2><a href="#">Microservices Architecture: A Guide</a></h2>
+                    <p>Learn about Microservices Architecture and why it’s becoming one of the most popular ways of building scalable systems. This post covers the fundamentals.</p>
+                    <a href="#">Read more...</a>
+                </div>
             </div>
-        </div>
 
-         <!-- Post Item 3 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
-            </div>
-        </div>
 
-         <!-- Post Item 3 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
+            <!-- Post Item 7 -->
+            <div class="post-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 5">
+                <div class="content">
+                    <h2><a href="#">Microservices Architecture: A Guide</a></h2>
+                    <p>Learn about Microservices Architecture and why it’s becoming one of the most popular ways of building scalable systems. This post covers the fundamentals.</p>
+                    <a href="#">Read more...</a>
+                </div>
             </div>
-        </div>
 
-         <!-- Post Item 3 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
+            <!-- Post Item 8 -->
+            <div class="post-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 5">
+                <div class="content">
+                    <h2><a href="#">Microservices Architecture: A Guide</a></h2>
+                    <p>Learn about Microservices Architecture and why it’s becoming one of the most popular ways of building scalable systems. This post covers the fundamentals.</p>
+                    <a href="#">Read more...</a>
+                </div>
             </div>
+            
         </div>
-
-         <!-- Post Item 3 -->
-        <div class="post-item">
-            <img src="https://via.placeholder.com/80" alt="Post Image 3">
-            <div class="content">
-                <h2><a href="#">Design Patterns in Programming</a></h2>
-                <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                <a href="#">Read more...</a>
-            </div>
-        </div>
-        <!-- More post items can be added here -->
     </div>
 
 </body>
