@@ -1,242 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A blog about programming, software development, and more.">
-    <title>Programming Blog</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="A blog about programming, software development, and more." />
+  <title>Programming Blog</title>
 
-    <style>
-        /* Global Styles */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            min-height: 100vh;
-            background-color: #edede9;
-            color: #333;
-        }
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
-        .container {
-            display: flex;
-            flex-grow: 1;
-            padding: 0;
-            width: 100%;
-            background-color: #edede9;
-        }
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
 
-        .sidebar {
-            width: 250px;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            bottom: 20px;
-            background-color: #77BFA3;
-            color: #333;
-            padding: 20px 15px;
-            box-sizing: border-box;
-            overflow-y: auto;
-            border-radius: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #edede9;
+      color: #333;
+      overflow-x: hidden;
+    }
 
-        .sidebar h3 {
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
+    .container {
+      display: flex;
+      flex-wrap: nowrap;
+      width: 100%;
+      background-color: #edede9;
+    }
 
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    .sidebar {
+      width: 250px;
+      flex-shrink: 0;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      bottom: 20px;
+      background-color: #77BFA3;
+      color: #333;
+      padding: 20px 15px;
+      overflow-y: auto;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-        .sidebar ul li {
-            margin: 15px 0;
-        }
+    .sidebar h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
 
-        .sidebar ul li a {
-            color: #333;
-            text-decoration: none;
-            font-size: 1.1rem;
-        }
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-        .sidebar ul li a:hover {
-            color: #0073e6;
-        }
+    .sidebar ul li {
+      margin: 15px 0;
+    }
 
-        .sidebar ul li ul {
-            padding-left: 20px;
-        }
+    .sidebar ul > li > a {
+      color: #333;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
 
-        .sidebar ul li ul li a {
-            font-size: 1rem;
-        }
+    .sidebar ul li a:hover {
+      color: #0073e6;
+    }
 
-        .main-content {
-            margin-left: 270px;
-            padding: 20px;
-            flex-grow: 1;
-            background-color: #edede9;
-            border-radius: 10px;
-        }
+    .sidebar ul li ul {
+      padding-left: 20px;
+    }
 
-        /* ✅ Responsive Post Grid */
-        .posts-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
+    .sidebar ul li ul li a {
+      font-size: 1rem;
+      font-weight: normal;
+    }
 
-        @media (min-width: 768px) {
-            .posts-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
+    .main-content {
+      margin-left: 270px;
+      padding: 20px;
+      flex-grow: 1;
+      width: 100%;
+      max-width: calc(100% - 270px);
+      overflow-x: hidden;
+    }
 
-        @media (min-width: 1024px) {
-            .posts-grid {
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-        }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
 
-        .post-item {
-            display: flex;
-            background-color: #ECF7E9;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        }
+    @media (min-width: 768px) {
+      .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
-        .post-item img {
-            width: 80px;
-            height: 80px;
-            border-radius: 10px;
-            margin-right: 15px;
-        }
+    @media (min-width: 1024px) {
+      .posts-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
 
-        .post-item .content {
-            flex-grow: 1;
-        }
+    @media (min-width: 1400px) {
+      .posts-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
 
-        .post-item h2 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: #56806A;
-        }
+    .post-item {
+      display: flex;
+      flex-direction: column;
+      background-color: #ECF7E9;
+      border-radius: 8px;
+      padding: 0;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      min-width: 0;
+    }
 
-        .post-item p {
-            font-size: 1rem;
-            color: #555;
-        }
+    .post-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0;
+      margin: 0;
+    }
 
-        .post-item a {
-            color: #94D1B2;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    .post-item .content {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .post-item a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    .post-item h2 {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+      color: #56806A;
+    }
+
+    .post-item p {
+      font-size: 1rem;
+      color: #555;
+      margin: 0 0 10px;
+    }
+
+    .post-item a {
+      color: #94D1B2;
+      text-decoration: none;
+      font-weight: bold;
+      align-self: flex-start;
+    }
+
+    .post-item a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <h3>Topics</h3>
-            <ul>
-                <li><a href="#">Web Development</a>
-                    <ul>
-                        <li><a href="#">HTML & CSS</a></li>
-                        <li><a href="#">JavaScript</a></li>
-                        <li><a href="#">React</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Software Architecture</a>
-                    <ul>
-                        <li><a href="#">Microservices</a></li>
-                        <li><a href="#">Monolithic Architecture</a></li>
-                        <li><a href="#">Event-Driven Architecture</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Design Patterns</a>
-                    <ul>
-                        <li><a href="#">Singleton</a></li>
-                        <li><a href="#">Factory</a></li>
-                        <li><a href="#">Observer</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">DevOps</a>
-                    <ul>
-                        <li><a href="#">CI/CD</a></li>
-                        <li><a href="#">Docker & Kubernetes</a></li>
-                        <li><a href="#">Monitoring</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Machine Learning</a>
-                    <ul>
-                        <li><a href="#">Neural Networks</a></li>
-                        <li><a href="#">Deep Learning</a></li>
-                        <li><a href="#">Natural Language Processing</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="posts-grid">
-                <div class="post-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
-                    <div class="content">
-                        <h2><a href="#">Introduction to Web Development</a></h2>
-                        <p>This post will walk you through the basics of web development...</p>
-                        <a href="#">Read more...</a>
-                    </div>
-                </div>
-
-                <div class="post-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
-                    <div class="content">
-                        <h2><a href="#">Understanding Software Architecture</a></h2>
-                        <p>Explore the fundamental concepts of software architecture...</p>
-                        <a href="#">Read more...</a>
-                    </div>
-                </div>
-
-                <div class="post-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
-                    <div class="content">
-                        <h2><a href="#">Design Patterns in Programming</a></h2>
-                        <p>Learn about various design patterns like Singleton, Factory, and Observer...</p>
-                        <a href="#">Read more...</a>
-                    </div>
-                </div>
-
-                <div class="post-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
-                    <div class="content">
-                        <h2><a href="#">DevOps: Best Practices</a></h2>
-                        <p>Explore the best practices for DevOps including CI/CD, automated testing...</p>
-                        <a href="#">Read more...</a>
-                    </div>
-                </div>
-
-                <div class="post-item">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
-                    <div class="content">
-                        <h2><a href="#">Microservices Architecture: A Guide</a></h2>
-                        <p>Learn about Microservices Architecture and how it helps scale systems...</p>
-                        <a href="#">Read more...</a>
-                    </div>
-                </div>
-
-                <!-- Add more post-item blocks as needed -->
-            </div>
-        </div>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h3>Topics</h3>
+      <ul>
+        <li><a href="#">Web Development</a>
+          <ul>
+            <li><a href="#">HTML & CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+            <li><a href="#">React</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Software Architecture</a>
+          <ul>
+            <li><a href="#">Microservices</a></li>
+            <li><a href="#">Monolithic Architecture</a></li>
+            <li><a href="#">Event-Driven Architecture</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Design Patterns</a>
+          <ul>
+            <li><a href="#">Singleton</a></li>
+            <li><a href="#">Factory</a></li>
+            <li><a href="#">Observer</a></li>
+          </ul>
+        </li>
+        <li><a href="#">DevOps</a>
+          <ul>
+            <li><a href="#">CI/CD</a></li>
+            <li><a href="#">Docker & Kubernetes</a></li>
+            <li><a href="#">Monitoring</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Machine Learning</a>
+          <ul>
+            <li><a href="#">Neural Networks</a></li>
+            <li><a href="#">Deep Learning</a></li>
+            <li><a href="#">Natural Language Processing</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="posts-grid">
+        <div class="post-item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+          <div class="content">
+            <h2><a href="#">Introduction to Web Development</a></h2>
+            <p>This post will walk you through the basics of web development...</p>
+            <a href="#">Read more...</a>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+          <div class="content">
+            <h2><a href="#">Understanding Software Architecture</a></h2>
+            <p>Explore the fundamental concepts of software architecture...</p>
+            <a href="#">Read more...</a>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+          <div class="content">
+            <h2><a href="#">Design Patterns in Programming</a></h2>
+            <p>Learn about various design patterns like Singleton, Factory, and Observer...</p>
+            <a href="#">Read more...</a>
+          </div>
+        </div>
+
+        <div class="post-item">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+          <div class="content">
+            <h2><a href="#">DevOps: Best Practices</a></h2>
+            <p>Explore the best practices for DevOps including CI/CD, automated testing...</p>
+            <a href="#">Read more...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
