@@ -13,33 +13,31 @@
             font-family: Arial, sans-serif;
             display: flex;
             min-height: 100vh;
-            background-color: #edede9; /* Set background color to #edede9 */
+            background-color: #edede9;
             color: #333;
         }
 
-        /* Container to hold both Sidebar and Content */
         .container {
             display: flex;
             flex-grow: 1;
             padding: 0;
             width: 100%;
-            background-color: #edede9; /* Background color for the whole page */
+            background-color: #edede9;
         }
 
-        /* Left Sidebar (Fixed) */
         .sidebar {
             width: 250px;
             position: fixed;
             top: 20px;
             left: 20px;
             bottom: 20px;
-            background-color: #77BFA3; /* Green sidebar background (#77BFA3) */
+            background-color: #77BFA3;
             color: #333;
             padding: 20px 15px;
             box-sizing: border-box;
             overflow-y: auto;
             border-radius: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow around the sidebar */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar h3 {
@@ -74,22 +72,39 @@
             font-size: 1rem;
         }
 
-        /* Main Content Area */
         .main-content {
             margin-left: 270px;
             padding: 20px;
             flex-grow: 1;
-            background-color: #edede9; /* Ensure background color continues behind the content area */
+            background-color: #edede9;
             border-radius: 10px;
+        }
+
+        /* ✅ Responsive Post Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .posts-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .posts-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
         }
 
         .post-item {
             display: flex;
-            background-color: #ECF7E9; /* Set the post item background color to #ECF7E9 */
+            background-color: #ECF7E9;
             border-radius: 8px;
-            margin-bottom: 20px;
             padding: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow around each post item */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .post-item img {
@@ -106,7 +121,7 @@
         .post-item h2 {
             margin: 0;
             font-size: 1.5rem;
-            color: #56806A; /* Green color for post title */
+            color: #56806A;
         }
 
         .post-item p {
@@ -115,7 +130,7 @@
         }
 
         .post-item a {
-            color: #94D1B2; /* Light green color for 'Read More' text */
+            color: #94D1B2;
             text-decoration: none;
             font-weight: bold;
         }
@@ -127,9 +142,8 @@
 </head>
 <body>
 
-    <!-- Main Container to hold Sidebar and Content -->
     <div class="container">
-        <!-- Left Sidebar -->
+        <!-- Sidebar -->
         <div class="sidebar">
             <h3>Topics</h3>
             <ul>
@@ -171,89 +185,56 @@
             </ul>
         </div>
 
-        <!-- Main Content Area -->
+        <!-- Main Content -->
         <div class="main-content">
-            <!-- Post Item 1 -->
-            <div class="post-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 1">
-                <div class="content">
-                    <h2><a href="#">Introduction to Web Development</a></h2>
-                    <p>This post will walk you through the basics of web development, covering HTML, CSS, and JavaScript, and how to build a simple website from scratch.</p>
-                    <a href="#">Read more...</a>
+            <div class="posts-grid">
+                <div class="post-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+                    <div class="content">
+                        <h2><a href="#">Introduction to Web Development</a></h2>
+                        <p>This post will walk you through the basics of web development...</p>
+                        <a href="#">Read more...</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Post Item 2 -->
-            <div class="post-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 2">
-                <div class="content">
-                    <h2><a href="#">Understanding Software Architecture</a></h2>
-                    <p>In this post, we explore the fundamental concepts of software architecture, why it's essential for scalable systems, and common architectural patterns.</p>
-                    <a href="#">Read more...</a>
+                <div class="post-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+                    <div class="content">
+                        <h2><a href="#">Understanding Software Architecture</a></h2>
+                        <p>Explore the fundamental concepts of software architecture...</p>
+                        <a href="#">Read more...</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Post Item 3 -->
-            <div class="post-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 3">
-                <div class="content">
-                    <h2><a href="#">Design Patterns in Programming</a></h2>
-                    <p>Learn about various design patterns like Singleton, Factory, and Observer. Understand how they can help make your code more maintainable and flexible.</p>
-                    <a href="#">Read more...</a>
+                <div class="post-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+                    <div class="content">
+                        <h2><a href="#">Design Patterns in Programming</a></h2>
+                        <p>Learn about various design patterns like Singleton, Factory, and Observer...</p>
+                        <a href="#">Read more...</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Post Item 4 -->
-            <div class="post-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 4">
-                <div class="content">
-                    <h2><a href="#">DevOps: Best Practices</a></h2>
-                    <p>Explore the best practices for DevOps, from continuous integration and continuous deployment to automated testing and containerization.</p>
-                    <a href="#">Read more...</a>
+                <div class="post-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+                    <div class="content">
+                        <h2><a href="#">DevOps: Best Practices</a></h2>
+                        <p>Explore the best practices for DevOps including CI/CD, automated testing...</p>
+                        <a href="#">Read more...</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Post Item 5 -->
-            <div class="post-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 5">
-                <div class="content">
-                    <h2><a href="#">Microservices Architecture: A Guide</a></h2>
-                    <p>Learn about Microservices Architecture and why it’s becoming one of the most popular ways of building scalable systems. This post covers the fundamentals.</p>
-                    <a href="#">Read more...</a>
+                <div class="post-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image">
+                    <div class="content">
+                        <h2><a href="#">Microservices Architecture: A Guide</a></h2>
+                        <p>Learn about Microservices Architecture and how it helps scale systems...</p>
+                        <a href="#">Read more...</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Post Item 6 -->
-            <div class="post-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 5">
-                <div class="content">
-                    <h2><a href="#">Microservices Architecture: A Guide</a></h2>
-                    <p>Learn about Microservices Architecture and why it’s becoming one of the most popular ways of building scalable systems. This post covers the fundamentals.</p>
-                    <a href="#">Read more...</a>
-                </div>
+                <!-- Add more post-item blocks as needed -->
             </div>
-
-
-            <!-- Post Item 7 -->
-            <div class="post-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 5">
-                <div class="content">
-                    <h2><a href="#">Microservices Architecture: A Guide</a></h2>
-                    <p>Learn about Microservices Architecture and why it’s becoming one of the most popular ways of building scalable systems. This post covers the fundamentals.</p>
-                    <a href="#">Read more...</a>
-                </div>
-            </div>
-
-            <!-- Post Item 8 -->
-            <div class="post-item">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6F8GwIw1i4IAj9KvRdHU4uMOpH1QgnTatw&s" alt="Post Image 5">
-                <div class="content">
-                    <h2><a href="#">Microservices Architecture: A Guide</a></h2>
-                    <p>Learn about Microservices Architecture and why it’s becoming one of the most popular ways of building scalable systems. This post covers the fundamentals.</p>
-                    <a href="#">Read more...</a>
-                </div>
-            </div>
-            
         </div>
     </div>
 
