@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="NoSQL Distilled post"/>
+  <title>NoSQL Distilled</title>
+
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #edede9;
+      color: #333;
+    }
+
+    .post-wrapper {
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #0D7C66;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+
+    .post-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #56806A;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .post-meta {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .post-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .post-wrapper {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .post-content p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="post-wrapper">
+    <a class="back-link" href="../index.html">&larr; Back to blog</a>
+    
+    <img src="../images/nosql_distilled.jpg" alt="NoSQL Distilled" class="post-image" />
+    
+    <h1>NoSQL Distilled</h1>
+    <div class="post-meta">Posted on April 24, 2025 | In: NotSQL</div>
+
+    <div class="post-content">
+      <p>NoSQL databases have become a critical tool for modern applications that require scalability, performance, and flexibility in data storage. Unlike traditional relational databases, NoSQL databases offer schema-less structures, horizontal scaling, and high availability.</p>
+
+      <p>In this post, we explore the differences between document stores, key-value pairs, column-family databases, and graph databases. Each of these types is suited to different kinds of problems and data models.</p>
+
+      <p>We’ll also discuss when it makes sense to move away from SQL and embrace a NoSQL solution, and what trade-offs to consider in terms of consistency, availability, and partition tolerance (CAP Theorem).</p>
+
+      <p>Stay tuned for more deep dives into specific NoSQL technologies and real-world use cases!</p>
+    </div>
+  </div>
+
+</body>
+</html>
