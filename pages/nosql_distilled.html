@@ -110,12 +110,23 @@
       <ul>
         <li><b>NoSQL</b> trade off <b><i>consistancy</i></b> for
           <ul> 
-            <li><b><i>Productivity</i></b> &longrightarrow; Application development <i>Productivity</i> &longrightarrow; No need mapping between <i>in-memory data structure</i> and <i>relational databases</i></li>
+            <li><b><i>Productivity</i></b> &longrightarrow; Application development <i>Productivity</i> &longrightarrow; No need mapping between <i>in-memory data structure</i> and <i>relational databases</i> (<i><b>No impedance mismatch</b></i>)</li>
             <li><b><i>Performance</i></b> &longrightarrow; <b><i>Cluster</i></b> &longrightarrow; <i>Relational databases</i> suitable for <i>Single machine</i> &longrightarrow; <i>NoSQL databases</i> suitable for <i>multiple machine (cluster)</i> &longrightarrow; <b><i>Better for big data scenario</i></b></li>
           </ul>
         </li>
       </ul>
  
+      <ul>
+        <li> Common characteristics of the <i>NoSQL databases</i>
+          <ul>
+            <li>&#10008 Not using relational model</li>
+            <li>&#10004 Running well on <i>clusters</i> &longrightarrow; <i>Size</i> and <i>performance</i></li>
+            <li>&#10004 <i>Open source</i></li>
+            <li>&#10004 <i>Schemaless</i> &longrightarrow; <i>No impedance mismatch</i></li>
+          </ul>
+        </li>
+      </ul>
+
       <hr>
 
       <ul>
@@ -162,7 +173,77 @@
 
       <hr>
 
-      <p><b><i></i></b></p>
+      <p>&#9679; <b><i>Polygot persistance</i></b> &longrightarrow; <b><i>NoSQL databases</i></b> <b>+</b> <b><i>Relational databases</i></b></p>
+      <p>&#9679; To make <i>polygot persistance</i> works &longrightarrow; <i>organizations</i> also need &longrightarrow; shift from &longrightarrow; <i><b>integration databases</b></i> to the <i><b>application databases</b>(encapsulating data in services)</i></p>
+      <p>&#10008 <b><i>NoSQL databases</i></b> <i>are not a good choice</i> for <i>integration databases</i>.</p>
+
+      <hr>
+
+      <h2>Aggregate data model</h2>
+      
+      &#9679 <b><i>Data model</i></b> &longrightarrow; The <i>model</i> through which we <b><i>perceive</i></b> and <b><i>manipulate</i></b> <i>data</i> &NotEqual; <i>Storage data model</i>
+
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+
+      <ul>
+        <li><i><b>Data model</b></i>
+          <ul>
+            <li><b><i>Aggregate ignorant</i></b> &longrightarrow; <b><i>Relational</i></b></li>
+            <li><b><i>Aggregate oriented</i></b> &longrightarrow; <b><i>NoSQL</i></b>
+              <ul>
+                <li><b><i>Key-Value</i></b></li>
+                <li><b><i>Document</i></b></li>
+                <li><b><i>Column-Family</i></b></li>
+                <li><i><b>Graph</b> (Aggregate ignorant)</i></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+
+      <ul>
+        <li> <i><b>Aggregate</b></i>
+          <ul>
+            <li><i>Data manipulation</i> &longrightarrow; Update aggregate with atomic operations</li>
+            <li><i>Management of consistancy (transation)</i> &longrightarrow; Communicate with our data storage in therms of <i>aggregate</i></li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+
+      <ul>
+        <li> <i><b>Transactions</b></i>
+          <ul>
+            <li><i><b>Relational databases</b></i> &longrightarrow; <i><b>Aggregate ignorant</b></i> databases &longrightarrow; <i><b>ACID</b> transaciton</i> &longrightarrow; Any combination of rows</li>
+            <li><i><b>NoSQL databases</b></i> &longrightarrow; <i><b>Aggregate oriented</b></i> databases
+              <ul>
+                <li>&#10008 <i><b>Multiple aggregate</b> &longrightarrow; <b>No ACID</b> transaction</i></li>
+                <li>&#10004 <i><b>Single aggregate</b> &longrightarrow; <b>Atomic</b> manipulation</i></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+
+      <ul>
+        <li> <i><b>NoSQL</b> databases <b>(aggregate oriented)</b></i>
+          <ul>
+            <li><i><b>Key-Value</b></i>
+              <ul>
+                <li><i>Strongly <b>aggregate oriented</b></i></li>
+                <li><i>Aggregate</i> is <i>opaque</i> to the <i>database</i></li>
+                <li><i>Having <b>Key</b> or <b>ID</b> to get data</i></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
     </div>
   </div>
