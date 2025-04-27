@@ -96,7 +96,7 @@
       
       <p><b>NoSQL</b> <i>born out of need to handle</i> larger data volumes <i>through</i> <b>cluster</b></p>
       
-      <hr>
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
       
       <ul>
         <li><b>NoSQL</b> generally applied to
@@ -127,7 +127,7 @@
         </li>
       </ul>
 
-      <hr>
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
       <ul>
         <li> <b>Relational databases</b>
@@ -156,7 +156,7 @@
         </li>
       </ul>
 
-      <hr>
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
       <ul>
         <li> Scale
@@ -167,24 +167,24 @@
         </li>
       </ul>
 
-      <hr>
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
       <p><b><i>NoSQL</i></b> &longrightarrow; &#10004; <i>Movement</i> &#10008; <i>Technology</i></p>
 
-      <hr>
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
       <p>&#9679; <b><i>Polygot persistance</i></b> &longrightarrow; <b><i>NoSQL databases</i></b> <b>+</b> <b><i>Relational databases</i></b></p>
       <p>&#9679; To make <i>polygot persistance</i> works &longrightarrow; <i>organizations</i> also need &longrightarrow; shift from &longrightarrow; <i><b>integration databases</b></i> to the <i><b>application databases</b>(encapsulating data in services)</i></p>
       <p>&#10008 <b><i>NoSQL databases</i></b> <i>are not a good choice</i> for <i>integration databases</i>.</p>
 
-      <hr>
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
 
       <h2>Aggregate data model</h2>
       
       &#9679 <b><i>Data model</i></b> &longrightarrow; The <i>model</i> through which we <b><i>perceive</i></b> and <b><i>manipulate</i></b> <i>data</i> &NotEqual; <i>Storage data model</i>
 
 
-      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
       <ul>
         <li><i><b>Data model</b></i>
@@ -202,7 +202,7 @@
         </li>
       </ul>
 
-      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
       <ul>
         <li> <i><b>Aggregate</b></i>
@@ -213,7 +213,7 @@
         </li>
       </ul>
 
-      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
       <ul>
         <li> <i><b>Transactions</b></i>
@@ -229,7 +229,7 @@
         </li>
       </ul>
 
-      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
       <ul>
         <li> <i><b>NoSQL</b> databases <b>(aggregate oriented)</b></i>
@@ -241,6 +241,65 @@
                 <li><i>Having <b>Key</b> or <b>ID</b> to get data</i></li>
               </ul>
             </li>
+            <li><i><b>Document</b></i>
+              <ul>
+                <li><i>Strongly <b>aggregate-orineted</b></i></li>
+                <li><i>Having a <b>Key</b> or <b>ID</b> to get the data</i></li>
+                <li><i>Able to see <b>structure of aggregate</b></i></li>
+                <li><i><b>Query</b> based on fileds in the aggregate</i></li>
+                <li><i><b>Retrivepart of the aggregate</b></i></li>
+                <li><i>Create</i> <b>index</b> based on the content of the aggregate</li>
+              </ul>
+            </li>
+            <li><i><b>Graph</b></i>
+              <ul>
+                <li><i>Small records with <b>complex interconections</b></i></li>
+                <li><i>In relational databases performance is poor for highly connected data model &longrightarrow; Graph databases make <b>teraversal along the relationships very cheap</b>. &longrightarrow; Graph database <b>shift most of the work of navigating relationships from query time to insert time</b> &LongRightArrow; for situations where quering performance is is more important that insert speed.</i></li>
+                <li><i>Graph database <b>except most of our work be navigating relationship</b></i></li>
+                <li><i>More likely <b>run on single server</b></i></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
+
+      <ul>
+        <li> <i><b>Materialized view</b> &longrightarrow; Views that are <b>computed in advance and cached on disk</b> &longrightarrow; Two strategies to building view</i>
+          <ul>
+            <li><i>Update the materialized view at the <b>same time we update</b> the base data</i></li>
+            <li><i><b>Batch jobs</b> to update the materialized views at regular intervals</i></li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;">
+
+      <p><b>Aggregate-oriented</b> databases make <i><b>inter-aggregate relationships</b></i> more <i><b>difficult</b></i> to handle than <i><b>intra-aggregate</b></i> relationships.</p>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Distribution Models</h2>
+
+      <p><i><b>Aggregate-oriented</b></i> databases fits well with <i><b>scale out</b></i> &longrightarrow; because &longrightarrow; <i>aggregate</i> is <i><b>natural unit to use for distribution.</b></i></p>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
+
+      <p><b>&#9888;</b> Running over a <i>cluster</i> intoduces <i>complexity</i>, so it is not something to do <i>unless the benfis are computing.</i></p>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
+
+      <ul>
+        <li><i><b>Data distribution</b></i>
+          <ul>
+            <li><i><b>Replicatoin</b> &longrightarrow; <b>Same data</b> over <b>multiple nodes</b></i></li>
+            <ul>
+              <li><i><b>Master-slave</b></i></li>
+              <li><i><b>Peer-to-peer</b></i></li>
+            </ul>
+            <li><i><b>Sharding</b> &longrightarrow; <b>Different data</b> on <b>different nodes</b></i> &longrightarrow; Busy data store is busy because differnt people are accessing <i>different parts of the dataset.</i> In this circumestances we can support <i>horizontal scalability</i> by <i>putting different data parts of the data onto different servers.</i> We have to ensure that <i>data that's accessed together is clumped together on the same node.</i></li>
+            <li><i><b>Single server</b></i></li>
           </ul>
         </li>
       </ul>
