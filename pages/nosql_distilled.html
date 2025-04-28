@@ -295,11 +295,54 @@
           <ul>
             <li><i><b>Replicatoin</b> &longrightarrow; <b>Same data</b> over <b>multiple nodes</b></i></li>
             <ul>
-              <li><i><b>Master-slave</b></i></li>
-              <li><i><b>Peer-to-peer</b></i></li>
+              <li> Types of <i>replicatoin</i> data distribution
+                <ul>
+                  <li><i><b>Master-slave</b></i>
+                    <ul>
+                      <li><i>One node</i> is designed as the <i>master</i> &longrightarrow; This <i>master</i> is the <i><b>authoritative source for the data</b></i> and is <i>usually</i> responsible for processing <i>any</i> <i><b>update</b> to the data.</i> &longrightarrow; Other nodes are <i>slave</i> or <i>secondaries</i> &longrightarrow; A <i>replcatoin process</i> <i>synchronizes</i> the <i>slaves</i> with the <i>master</i></li>
+                      <li>&#10004 It is useful for <i>scaling</i> when we have <i><b>read-intensive dataset.</b></i></li>
+                      <li>&#10008 It <i>isn't</i> such good scheme for database with <i><b>heavy write traffic</b></i> &longrightarrow; although <i>offloading the read trafic will help a bit with handeling the write load</i>.</li>
+                      <li>&#10004 <i>Read resilience.</i></li>
+                      <li>&#10008 The <i>failure</i> of <i>master</i> does <i>eliminate the ability to handle writes</i> until either <i>the master is restored</i> or a <i>new master appointed</i>.</li>
+                      <li>&#10004 <i>Master-slave</i> replication is useful even if we <i>don't</i> need to <i>scale out</i>. &longrightarrow; We can think of the <i>master-slave replicaiton</i> as a <i>single-server</i> store with a <i>hot backup</i>.</li>
+                      <li>&#10008 <i>Dark side is inconsistancy.</i> &longrightarrow; We have the danger that <i>different clients, reading differnt slaves because the changes haven't all propagated to the slaves</i>. &longrightarrow; <i>In worst case, a client cannot read write it just made</i>.</li>
+                    </ul>
+                  </li>
+                  <li><i><b>Peer-to-peer</b></i></li>
+                </ul>
+              </li>
             </ul>
-            <li><i><b>Sharding</b> &longrightarrow; <b>Different data</b> on <b>different nodes</b></i> &longrightarrow; Busy data store is busy because differnt people are accessing <i>different parts of the dataset.</i> In this circumestances we can support <i>horizontal scalability</i> by <i>putting different data parts of the data onto different servers.</i> We have to ensure that <i>data that's accessed together is clumped together on the same node.</i></li>
+            <li><i><b>Sharding</b> &longrightarrow; <b>Different data</b> on <b>different nodes</b></i>
+              <ul>
+                <li>Points
+                  <ul>
+                    <li>Busy data store is busy because differnt people are accessing <i>different parts of the dataset.</i> In this circumestances we can support <i>horizontal scalability</i> by <i>putting different data parts of the data onto different servers.</i> We have to ensure that <i>data that's accessed together is clumped together on the same node.</i></li>
+                    <li><i>Aggregate orientation</i> in <i>Sharding</i> data distribution comes really handy &longrightarrow; The whole point of aggregate is that we design them to combine data that's commonly accessed together.
+                      <ul>
+                        <li>&#10004 If we know that most accesses of <i>certian aggregates</i> are based on a <i>physical location</i>, we can <i>place the data close to where it's being accessed.</i></li>
+                        <li>&#10004 <i>In some cases</i>, it's useful to put <i>aggregates</i> <i>together</i> if we think they may be <i>read in sequence</i>.</li>
+                      </ul>
+                    </li>
+                    <li>Imporve <i>read</i> and <i>write</i> performance &longrightarrow; <i>horizontaly scale write.</i></li>
+                    <li><i>Sharding</i> does <li>little</li> to imporove <i>resilience</i> when <i>used alone</i>. &longrightarrow; <i> a node failure makes that's shard data unavailable</i> &longrightarrow; like <i>single server</i> solution
+                      <ul>
+                        <li> &#10008 With <i>single server</i> it's <i>easier</i> to pay the effort and cost to <i>keep that server up and running</i> &longrightarrow; <i><b>Sharding alone is likely to decrease resilience.</b></i></li>
+                      </ul>
+                    </li>
+                    <li>&#10004 It is <i>best</i> to start <i>single server</i> and use <i>sharding</i> <b>once our load projection clearly indicate that we are running out of headroom</b> &longrightarrow; We should use <i>sharding</i> <b>well <i>before</i> we need to. When we have <i>enough</i> headroom to <i>carry out the sharding</i></b></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
             <li><i><b>Single server</b></i></li>
+            <ul>
+              <li>Points
+                <ul>
+                  <li>Must often <i>recomended</i></li>
+                  <li><i>Graph databases</i> work best on <i>single server</i></li>
+                </ul>
+              </li>
+            </ul>
           </ul>
         </li>
       </ul>
