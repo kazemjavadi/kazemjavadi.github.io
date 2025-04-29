@@ -306,9 +306,20 @@
                       <li>&#10008 The <i>failure</i> of <i>master</i> does <i>eliminate the ability to handle writes</i> until either <i>the master is restored</i> or a <i>new master appointed</i>.</li>
                       <li>&#10004 <i>Master-slave</i> replication is useful even if we <i>don't</i> need to <i>scale out</i>. &longrightarrow; We can think of the <i>master-slave replicaiton</i> as a <i>single-server</i> store with a <i>hot backup</i>.</li>
                       <li>&#10008 <i>Dark side is inconsistancy.</i> &longrightarrow; We have the danger that <i>different clients, reading differnt slaves because the changes haven't all propagated to the slaves</i>. &longrightarrow; <i>In worst case, a client cannot read write it just made</i>.</li>
+                      <li>&#10008 I we use <i>master-slave replicatoin</i> just for <i>hot backup</i> this can be a concern, because &longrightarrow; if the master fails, any updates not passed on to the backup are lost.</li>
                     </ul>
                   </li>
-                  <li><i><b>Peer-to-peer</b></i></li>
+                  <li><i><b>Peer-to-peer</b></i>
+                    <ul>
+                      <li>All <i>replicas</i> have <i>equal weight</i>. &longrightarrow; <i><b>All accept read and write</b></i>.</li>
+                      <li>&#10004 We can ride over node failures without losing access to the data.</li>
+                      <li>&#10004 We can easily add nodes to improve our performance.</li>
+                      <li>&#10008 When we can <i>write to two different places,</i> &longrightarrow; <i>we run the risk taht two people will attempt to update the same record at the same time. &longrightarrow; <i><b>Write-write conflict</b> (Two or more people attemptto update the same record at the same time)</i></li>
+                      <li>&#10004 <i>Inconsistancy</i> on <i>read</i> are <i>transient</i>, but <i>inconsistancy</i> on <i>writes</i> are <i>forever</i>.</li>
+                      <li> The <i>replicas</i> <i>coordinate</i> to ensure we avoid <i>write conflict</i> &longrightarrow; cost of network traffic to coordinate the writes. &longrightarrow; We don't need all the replicas to agree on the <i>write</i>, just majority &longrightarrow; We can still survive losing a minority of the replica nodes.</li>
+                      <li><i>Trade off consistancy for availability</i></li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -344,6 +355,42 @@
               </li>
             </ul>
           </ul>
+        </li>
+      </ul>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Consistancy</h2>
+
+      <p> &#9679 As soon as we <i>start building</i>something we havet to think about <i><b>what sort of consistancy we need</b></i> for our system.</p>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
+
+      <ul>
+        <li> <i><b>Update consistancy</b></i>
+          <ul>
+            <li><i><b>Write-write conflict</b></i> &longrightarrow; two people <i><b>updating</b></i> the <i><b>same data item</b></i> at the <i><b>same time</b></i>.</li>
+            <li>Maintaining <i><b>consistancy</b></i> in the face of <i><b>concurency</b></i> are often described at the
+              <ul>
+                <li><b>Pessimistic</b> &longrightarrow; <i><b>Preventing confilict from occuring</b></i>
+                  <ul>
+                    <li>The most common <i>pessimistic</i> approach s to have <i><b>write locks</b></i>, so that <i><b>in order to change a value we need to acquire a lock</b></i> and system ensure that <i><b>only one client can get a lock at a time</b></i>.</li>
+                    <li>&#10008 <i>Pessimistic cuncurency</i> often leads to <i><b>deadlock</b></i>s, which are <i>hard to prevent and debug</i>.</li>
+                  </ul>
+                </li>
+                <li><b>Optimistic</b> &longrightarrow; <i><b>Lets confilicts occur, but detects them</b> and takes action to sort them out.</i>
+                  <ul>
+                    <li>A common <i>optimistic</i> approach is a <i><b>conditional update.</b></i> &longrightarrow; <i>Any client</i> that does an <i>update</i> <i><b>tests the value just before updating</b></i> to see if it's <i>changed since his last read</i>.</li>
+                    <li>Any <i>automated mrege</i> of <i>write-to-write</i> conflicts is highly <i><b>domain-specific</b></i> and <i>needs to be programmed for eah particular case</i>.</li>
+                  </ul>
+                </li>
+                <li><b>Optimistic</b> &longrightarrow; <i><b>Lets confilicts occur</b>, but <b>detects</b> them and <b>takes action to sort them out</b></i>.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li> <i><b>Read consistancy</b></i>
+          <ul></ul>
         </li>
       </ul>
 
