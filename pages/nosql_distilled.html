@@ -173,15 +173,15 @@
 
       <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
-      <p>&#9679; <b><i>Polygot persistance</i></b> &longrightarrow; <b><i>NoSQL databases</i></b> <b>+</b> <b><i>Relational databases</i></b></p>
-      <p>&#9679; To make <i>polygot persistance</i> works &longrightarrow; <i>organizations</i> also need &longrightarrow; shift from &longrightarrow; <i><b>integration databases</b></i> to the <i><b>application databases</b>(encapsulating data in services)</i></p>
+      <p><b>*</b> <b><i>Polygot persistance</i></b> &longrightarrow; <b><i>NoSQL databases</i></b> <b>+</b> <b><i>Relational databases</i></b></p>
+      <p><b>*</b> To make <i>polygot persistance</i> works &longrightarrow; <i>organizations</i> also need &longrightarrow; shift from &longrightarrow; <i><b>integration databases</b></i> to the <i><b>application databases</b>(encapsulating data in services)</i></p>
       <p>&#10008 <b><i>NoSQL databases</i></b> <i>are not a good choice</i> for <i>integration databases</i>.</p>
 
       <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
 
       <h2>Aggregate data model</h2>
       
-      &#9679 <b><i>Data model</i></b> &longrightarrow; The <i>model</i> through which we <b><i>perceive</i></b> and <b><i>manipulate</i></b> <i>data</i> &NotEqual; <i>Storage data model</i>
+      <b>*</b> <b><i>Data model</i></b> &longrightarrow; The <i>model</i> through which we <b><i>perceive</i></b> and <b><i>manipulate</i></b> <i>data</i> &NotEqual; <i>Storage data model</i>
 
 
       <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
@@ -305,7 +305,7 @@
                       <li>&#10004 <i>Read resilience.</i></li>
                       <li>&#10008 The <i>failure</i> of <i>master</i> does <i>eliminate the ability to handle writes</i> until either <i>the master is restored</i> or a <i>new master appointed</i>.</li>
                       <li>&#10004 <i>Master-slave</i> replication is useful even if we <i>don't</i> need to <i>scale out</i>. &longrightarrow; We can think of the <i>master-slave replicaiton</i> as a <i>single-server</i> store with a <i>hot backup</i>.</li>
-                      <li>&#10008 <i>Dark side is inconsistancy.</i> &longrightarrow; We have the danger that <i>different clients, reading differnt slaves because the changes haven't all propagated to the slaves</i>. &longrightarrow; <i>In worst case, a client cannot read write it just made</i>.</li>
+                      <li>&#10008 <i>Dark side is inconsistency.</i> &longrightarrow; We have the danger that <i>different clients, reading differnt slaves because the changes haven't all propagated to the slaves</i>. &longrightarrow; <i>In worst case, a client cannot read write it just made</i>.</li>
                       <li>&#10008 I we use <i>master-slave replicatoin</i> just for <i>hot backup</i> this can be a concern, because &longrightarrow; if the master fails, any updates not passed on to the backup are lost.</li>
                     </ul>
                   </li>
@@ -315,7 +315,7 @@
                       <li>&#10004 We can ride over node failures without losing access to the data.</li>
                       <li>&#10004 We can easily add nodes to improve our performance.</li>
                       <li>&#10008 When we can <i>write to two different places,</i> &longrightarrow; <i>we run the risk taht two people will attempt to update the same record at the same time. &longrightarrow; <i><b>Write-write conflict</b> (Two or more people attemptto update the same record at the same time)</i></li>
-                      <li>&#10004 <i>Inconsistancy</i> on <i>read</i> are <i>transient</i>, but <i>inconsistancy</i> on <i>writes</i> are <i>forever</i>.</li>
+                      <li>&#10004 <i>inconsistency</i> on <i>read</i> are <i>transient</i>, but <i>inconsistency</i> on <i>writes</i> are <i>forever</i>.</li>
                       <li> The <i>replicas</i> <i>coordinate</i> to ensure we avoid <i>write conflict</i> &longrightarrow; cost of network traffic to coordinate the writes. &longrightarrow; We don't need all the replicas to agree on the <i>write</i>, just majority &longrightarrow; We can still survive losing a minority of the replica nodes.</li>
                       <li><i>Trade off consistancy for availability</i></li>
                     </ul>
@@ -362,7 +362,7 @@
 
       <h2>Consistancy</h2>
 
-      <p> &#9679 As soon as we <i>start building</i>something we havet to think about <i><b>what sort of consistancy we need</b></i> for our system.</p>
+      <p> <b>*</b> As soon as we <i>start building</i>something we havet to think about <i><b>what sort of consistancy we need</b></i> for our system.</p>
 
       <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
 
@@ -390,7 +390,57 @@
           </ul>
         </li>
         <li> <i><b>Read consistancy</b></i>
-          <ul></ul>
+          <ul>
+            <li><i><b>Read-write</b> conflict</i> &longrightarrow; <i>inconsistent read</i> &longrightarrow; <i>A <b>read</b> in the <b>middle of</b> the <b>write</b>.</i> &longrightarrow; <i><b>locgical consistancy</b></i> &longrightarrow; <i>Ensuring that  different data items makes sense together.</i></li>
+            <ul>
+              <li>&#10004 Solution: to avoid the <i>read-write conflict</i></li>
+              <ul>
+                <li><i><b>Relational databases</b></i> &longrightarrow; Support the notion of <i><b>transaction</b></i>.</li>
+                <li><i><b>Aggregate-oriented databases</b></i> &longrightarrow; Support <i><b>atomic update</b></i>, but only within a <i><b>single aggregate</b></i> &longrightarrow; <i><b>Logical consistancy</b></i> within an <i>aggregate</i> but <i><b>not between aggregate</b></i></li>
+              </ul>
+              <li><i><b>Inconsistency window</b></i> &longrightarrow; The <i>length of time</i> an <i>inconsistency</i> is <i>present</i> is called the <i>inconsistency window</i>.</li>
+              <li><i><b>Replicaiton consistency</b></i> &longrightarrow; Ensuring that the <i>same data item</i> has the <i>same value</i> when <i>read from different replicas</i>.</li>
+              <li><i><b>Eventually consistent</b></i> &longrightarrow; Any time nodes may have <i>replication inconsistencies</i> but if there are <i>no further updates</i>, eventually all nodes will be updated to the <i>same value</i>.</li>
+              <li><i><b>Stale data</b></i> &longrightarrow; Data that is <i>out of the date</i>.</li>
+              <li><i><b>Read-your-write consistency</b></i> &longrightarrow; Once you're made an <i>update</i>. You're <i>guaranteed</i> to <i>continue seeing that update.</i></li>
+              <li><i><b>Session consistency</b></i> &longrightarrow; <i>Within the a user session there is <b>Read-your-write consistency</b></i>
+                <ul>
+                  <li>&#10004 <i><b>Solutions:</b></i>
+                    <ul>
+                      <li><i><b>Sticky session</b></i> &longrightarrow; A session that's <i>tied to one node</i>. &longrightarrow; <i>Reduce</i> the ability of the <i>load balancer</i> to do it's job.</li>
+                      <li><i><b>Version stamp</b></i></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </ul>
+        </li>
+        <li><i><b>Relaxing consistency</b></i>
+          <ul>
+            <li><i>consistency</i> is a good thing but <i>sometimes we have to sacrifice it</i>. &longrightarrow; It is always possible to design a system to avoid <i>inconsistencies</i>, but often imposible to do so <i>without</i> making <i>unbearable sacrifices</i> in <i>other characteristics</i> of the <i>system</i>. &longrightarrow; <i>Different domains have different tolerance for inconsistency</i>,  and <i>we need to take this tolerance into account as we make our decisions</i>. &longrightarrow; <b>*</b> Many systems forgo <i>transactions</i> entirely because the <i>performance</i> impact of the <i>transaction</i>s is too high.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
+
+      <i><b>* Cache</b></i> &longrightarrow; Is <i>another form of</i> <i><b>replicaton</b></i> &longrightarrow; Essentially following <i><b>master-slave</b> distribution model</i>.
+      
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
+
+      <p><i><b>consistency</b> guarantes</i> <i><b>aren't</b></i> something that's <i><b>global</b></i> to an <i>application</i> &longrightarrow; We can usually specify the <i><b>level of consistency</b></i> we want with <i><b>individual requests</b></i> &longrightarrow; This <i>allow us</i> to use <i><b>weak consistency</b></i> <i>most of the time</i> when it isn't an issue, but request <i>strong-consistency</i> when it is.</p>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
+
+      <ul>
+        <li><i><b>ACID transaction</b></i>
+          <ul>
+            <li><i><b>Atomicity</b></i></li>
+            <li><i><b>Consistency</b></i></li>
+            <li><i><b>Isolation</b></i></li>
+            <li><i><b>Durability</b></i></li>
+          </ul>
         </li>
       </ul>
 
