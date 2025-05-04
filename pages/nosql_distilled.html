@@ -416,9 +416,19 @@
             </ul>
           </ul>
         </li>
-        <li><i><b>Relaxing consistency</b></i>
+        <li><i><b>Relaxing consistency</b></i> &longrightarrow; <i>consistency</i> is a good thing but <i>sometimes we have to sacrifice it</i>. &longrightarrow; It is always possible to design a system to avoid <i>inconsistencies</i>, but often imposible to do so <i>without</i> making <i>unbearable sacrifices</i> in <i>other characteristics</i> of the <i>system</i>. &longrightarrow; <i>Different domains have different tolerance for inconsistency</i>,  and <i>we need to take this tolerance into account as we make our decisions</i>. &longrightarrow; <b>*</b> Many systems forgo <i>transactions</i> entirely because the <i>performance</i> impact of the <i>transaction</i>s is too high.
           <ul>
-            <li><i>consistency</i> is a good thing but <i>sometimes we have to sacrifice it</i>. &longrightarrow; It is always possible to design a system to avoid <i>inconsistencies</i>, but often imposible to do so <i>without</i> making <i>unbearable sacrifices</i> in <i>other characteristics</i> of the <i>system</i>. &longrightarrow; <i>Different domains have different tolerance for inconsistency</i>,  and <i>we need to take this tolerance into account as we make our decisions</i>. &longrightarrow; <b>*</b> Many systems forgo <i>transactions</i> entirely because the <i>performance</i> impact of the <i>transaction</i>s is too high.</li>
+            <li><i><b>Relaxing Durability</b></i> &longrightarrow; 
+              <ul>
+                <li>There are cases where we may want to trade off some <i>durability</i> for higher performance. &longrightarrow; If a database can run mostlly in memory, apply updates to its in-memory representation, and periodically flush changes to disk, then it may be able to provide substantialy responsiveness to requests. &longrightarrow; The cost is that, in the database crash, any updatessince the last flush will be lost.</li>
+                <li>We can improve <i>replication durability</i> by ensuring that the master waits for some replicas to acknowledge the update before the master acknowledges it to the client. Obviously, however, that will slow down updates and make the cluster unavailable if slaves fail. &longrightarrow; We have trade off.</li>
+                <li><i><b>Quarum</b></i> &longrightarrow; The more nodes we involves in a request, th ehigher is the chance of avoiding an inconsistency. &longrightarrow; (This inequalities are written with a peer-to-peer distribution model in mind)
+                  <ul>
+                    <li>Ensuring strong consistency on write &longrightarrow; <i><b>W > N/2</b></i> &longrightarrow; <i><b>W</b></i>: Number of nodes participating in the write. <i><b>N</b></i>: Number of nodes involved in the replication (<i>replicatoin factor</i>)</li>
+                    <li>Ensuring we get latest data &longrightarrow; <i><b>W + R > N</b></i></li>
+                  </ul>
+                </li>
+              </ul>
           </ul>
         </li>
       </ul>
@@ -436,10 +446,62 @@
       <ul>
         <li><i><b>ACID transaction</b></i>
           <ul>
-            <li><i><b>Atomicity</b></i></li>
-            <li><i><b>Consistency</b></i></li>
-            <li><i><b>Isolation</b></i></li>
-            <li><i><b>Durability</b></i></li>
+            <li><i><b>Atomicity</b></i> &longrightarrow; <i><b>All or nothing</b></i> &longrightarrow; A <i><b>transaction</b></i> must fully <i>complete</i> or <i>not happen</i> at all. &longrightarrow; <i><b>No partial update</b></i></li>
+            <li><i><b>Consistency</b></i> &longrightarrow; <i><b>Valid state</b></i> &longrightarrow; A <i><b>transacion</b></i> must take the database <i>from one valid state to other</i>, following all <i>rules, constraints, and relationships</i>.</li>
+            <li><i><b>Isolation</b></i> &longrightarrow; <i><b>No interference</b></i> &longrightarrow; <i><b>Transaction</b></i> happen <i>independently</i> &longrightarrow; <i><b>One transactions's changes won't be visible to others until it's done.</b></i></li>
+            <li><i><b>Durability</b></i> &longrightarrow; <i><b>It's saved</b></i> &longrightarrow; Once a <i><b>transaction</b></i> is comitted, <i>the changes are permanent</i>, even if the system craches.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="width: 75%; margin-left: 0; margin-top: 20px; margin-bottom: 20px;"> <!--Seperator-->
+
+      <ul>
+        <il> the <i><b>CAP theorem</b> &longrightarrow; Between three properties on <i><b>consistency</b>, <i><b>availability</b> and <i><b>partition tolerance</b></i>, we can <i>only get two</i> &longrightarrow; In a system that may <i>suffer</i> <i><b>partitions</b></i>, as disributed systems do, you have to <i>trade off <b>consistency</b> versus <b>availability</b></i> &longrightarrow; This isn't a binary decision, often, we can <i>trade off a little consistency to get some availability.</i> &longrightarrow; <i>We can not solve it purely within the development team, we have to talk to domain experts.</i>
+          <uL>
+            <li><i><b>Availability</b></i> &longrightarrow; It we can tlak to a node in the <i><b>cluster</b></i>, <i>it can read and write data.</i></li>
+            <li><i><b>Partition tolerance</b></i> &longrightarrow; Cluster can survive communication breakages that separate the cluster into multiple partitions unable to communicate with each other.</li>
+          </uL>
+        </il>
+      </ul>
+
+      <p><b>*</b> A <i>single-server system</i> is the example of <i>CA system</i> &longrightarrow; has &#10004<i>consistency</i> and &#10004<i>availability</i> but not &#10008<i>partition tolerance</i></p>
+
+      <ul>
+        <li> <i><b>BASE</b></i>
+          <ul>
+            <li><i><b>Basically Available</b></i> &longrightarrow; <i><b>Prioritize uptime over immediate consistency</b></i></li>
+            <li><i><b>Soft state</b></i> &longrightarrow; <i><b>Date isn't always in a fixed state because updates can propagate with delay.</b></i></li>
+            <li><i><b>Eventual consistency</b></i> &longrightarrow; The system guaranees that, <i>eventually all nodes will have consistent data.</i> &longrightarrow; <i><b>Immediate consistency</b> isn't required like in <b>ACID</b> systems.</i></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><i><b>NoSQL</b></i> systems follow the <i><b>BASE</b></i> properties</p>
+      <P> <b>BASE</b> &longleftarrow; <i>trade off between <b>ACID</b> and <b>BASE</b> as a spectrum, not a binary choice</i> &longrightarrow; <b>ACID</b></P>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Version stamp</h2>
+
+      <p><i><b>Version stamp</b></i> &longrightarrow; <i><b>Optimistic offline lock</b></i> &longrightarrow; The need to <i><b>update consistency without transaction</b></i> &longrightarrow; Usually applications only begin a <i>system transactions</i> at the end of the interaction with the user, so that the locks are only held for a short period of time. &longrightarrow; The problem, however is that calculations and decisions may have been made based on data that's changed.</p>
+
+      <ul>
+        <li><i><b>Optimistic offline lock</b></i> &longrightarrow; <i><b>Version stamp</b> schemas</i>
+          <ul>
+            <li>Counter</li>
+            <li>Guid</li>
+            <li>Content hash</li>
+            <li>Time stamp</li>
+          </ul>
+        </li>
+      </ul>
+
+      <ul>
+        <li>For peer-to-peer NoSQL systems + multiple-master &longrightarrow; <i><b>Verctor stamp</b></i>
+          <ul>
+            <li>Vector clock</li>
+            <li>Version verctor</li>
           </ul>
         </li>
       </ul>
