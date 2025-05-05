@@ -506,6 +506,99 @@
         </li>
       </ul>
 
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Map-reduce pattern</h2>
+
+      <ul>
+        <li><i><b>Map-reduce</b></i> is a <i><b>pattern</b></i> to allow <i><b>computation</b></i>s to be <i><b>parrallelized</b></i> over a <i><b>cluseter</b></i>
+          <ul>
+            <li><i><b>Map</b></i> &longrightarrow; Read data from <i><u>an</u></i> <i><b>aggregate</b></i> and <i><u>boils it down</u></i> to relevant <i><b>key-value pairs</b></i> &longrightarrow; <i><b>Maps only read a single record at a time</b></i> and can thus be <i><b>parallelized</b></i> and run on the <i>node</i> that stores the record.</li>
+            <li><i><b>Reduce</b></i> &longrightarrow; <i><b>Take many values</b></i> for a <i><b>single key</b></i> &longrightarrow; (<i><b>Output from map tasks</b></i>) &longrightarrow; and <i><b>summarize</b></i> them into a <i><b>single</b></i> output. &longrightarrow; <i><b>Each redeucer operates on the result of a single key</b></i>, so it can be <i><b>parallelized</b></i> by <i><b>key</b></i> &longrightarrow; Reducers that have the same form for <i>input</i> and <i>output</i> can be combined into pipelines. This improves <i>parallelism</i> and reduces the amount of data to be transferred. &longrightarrow; <i>Map-reduce</i> operations can be composed into pipelines where the output of one <i>reduce</i> is the input to another operation's <i>map</i>.</li> 
+          </ul>
+        </li>
+      </ul>
+      
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Key-value databases</h2>
+
+      <ul>
+        <li>A <i><b>key-value store</b></i> is a simple <i><b>hash table</b></i> &longrightarrow; Primarily used when all access to the database is via <i><b>primary key</b></i> &longrightarrow; Think of a <i><b>table</b></i> in a traditional RDBMS with <i>two columns</i>, such as <i>ID</i> and <i>NAME</i>, the <i>ID</i> column being the <i>key</i> and <i>NAME</i> column storing the <i>value</i>. In an RDBMS, the <i>NAME</i> column is restricted to storing data of type <i>string</i>. &longrightarrow; If the <i>ID</i> exists the current value is <i>overwritten</i>, otherwise <i>a new entry</i> is <i>created</i>.</li>
+        <li>The value is <i><b>blob</b></i> that the data store just stores, without caring or knowing what's inside. &longrightarrow; It's the responsibility of the <i>application</i> to understand what was knowing what's inside. &longrightarrow; It's the responsibility of the <i>application</i> to understand what was stored.</li>
+        <li>Since <i><b>key-value</b></i> stores always use <i><b>primary=key</b></i> access, they generally have great <i><b>performance</b></i> and can be easily scaled.</li>
+        <li><i><b>Suitable use cases</b></i>
+          <ul>
+            <li>Sotring session information</li>
+            <li>User profile, preferences &longrightarrow; userId, username, language, color, timezone, ...</li>
+            <li>Soping card data &longrightarrow; Shopping carts tied to the user. As we want the shopping carts to be available all the time, across browsers, machines, sessions, ...</li>
+          </ul>
+        </li>
+        <li><i><b>When not to use</b></i>
+          <ul>
+            <li>Relationships among data</li>
+            <li>Multioperation transactions &longrightarrow; If you're saving multipe keys and there is a failure to save any one to them, and you want to revert or roll back rest of the operations.</li>
+            <li>Query by data</li>
+            <li>Operations by sets &longrightarrow; Since operations are limited to one key at a time, there is no way to operate upon multiple keys at the same time. If we need to operate upon multiple keys, we have to handle this from the client side.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Document databases</h2>
+
+      <ul>
+        <li>Documents are the main concept in the document databases. &longrightarrow; The database stores and retrieves documents, which can be XML, JSON, BSON, and so on.</li>
+        <li>Document databases store documents in the value part of the key-value store &longrightarrow; Think about document databases as key-value store where the value is <i>examinable</i>.</li>
+        <li>The schema of the data can differ across documents, but these documents can still belong to the same collection &longrightarrow; Unlike an RDBMS where every row in a table has to follow the same schema.</li>
+        <li>In documents, ther are no empty (null) attribute; if a given attribute is not found, we assume it was not set or not relevant to the document.</li>
+        <li><i><b>Transaction</b></i>s at the <i>single-document</i> level are known as <i><b>atomic transaction</b></i>s</li>
+        <li>Document databases provide different query features. &longrightarrow; We can query the data inside the document without having to retrieve the whole document by its key and then introspect the docuement.</li>
+        <li><i><b>Suitable use cases</b></i>
+          <ul>
+            <li>Event logging</li>
+            <li>Content management systems, Blogging platforms</li>
+            <li>Web analytics or real-time analytics</li>
+            <li>E-Commerce Applications &longrightarrow; E-Commerce applications often need to have flexible schema fro products and orders, as well as the ability to evolve their data models without expensive database refactoring or data migration.</li>
+          </ul>
+        </li>
+        <li><i><b>When not to use</b></i>
+          <ul>
+            <li>Complex transactions spanning different operations</li>
+            <li>Queries against varying aggregate structure</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Column-Family databases</h2>
+
+      <ul>
+        <li><i><b>Suitable use caes</b></i>
+          <ul>
+            <li>Event logging &longrightarrow; Work ideally for an event logging system.</li>
+            <li>Content management systems, Blogging platforms</li>
+            <li>Counters</li>
+            <li>Expiring usage</li>
+          </ul>
+        </li>
+        <li><i><b>When not to use</b></i>
+          <ul>
+            <li>Systems that require ACID transactions for write and reads.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Graph databases</h2>
+
+      <ul>
+        <li>Since graph databases are operatig on connected nodes, most graph database solutions usually do not support distributing the nodes on different servers &longrightarrow; within a asingle server, data is always consistent. &longrightarrow; Graph databases ensure consistency through transactions. They do not allow dangling relationships. The start node and end node always have to exist, and nodes can only be deleted if the don't ave any relationaships attached to them.</li>
+      </ul>
+
     </div>
   </div>
 
