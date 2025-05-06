@@ -370,7 +370,7 @@
         <li> <i><b>Update consistancy</b></i>
           <ul>
             <li><i><b>Write-write conflict</b></i> &longrightarrow; two people <i><b>updating</b></i> the <i><b>same data item</b></i> at the <i><b>same time</b></i>.</li>
-            <li>Maintaining <i><b>consistancy</b></i> in the face of <i><b>concurency</b></i> are often described at the
+            <li>Maintaining <i><b>consistancy</b></i> in the face of <i><b>concurrency</b></i> are often described at the
               <ul>
                 <li><b>Pessimistic</b> &longrightarrow; <i><b>Preventing confilict from occuring</b></i>
                   <ul>
@@ -597,6 +597,68 @@
 
       <ul>
         <li>Since graph databases are operatig on connected nodes, most graph database solutions usually do not support distributing the nodes on different servers &longrightarrow; within a asingle server, data is always consistent. &longrightarrow; Graph databases ensure consistency through transactions. They do not allow dangling relationships. The start node and end node always have to exist, and nodes can only be deleted if the don't ave any relationaships attached to them.</li>
+        <li>In <i><b>NoSQL databases</b></i>, one of the commonly used <i><b>scaling techniques</b></i> is <i><b>sharding</b></i>, where data is <i><b>split</b></i> and <i><b>distributed</b></i> across <i><b>different servers</b></i>. &longrightarrow; With <i><b>graph databases</b></i> <i><b>sharding</b></i> is <i>difficult</i>, as <i>graph databases</i> <u>are not</u> <i><b>aggregate-oriented</b></i> but <i><b>relationship-oriented</b>. &longrightarrow; Since any given node can be related to any other node, <i><b>storing related nodes on the same sever is better for graph traversal</b></i>. &longrightarrow; <i>Traversing a graph when the nodes are on different machines is not good for performance</i>. &longrightarrow; There are three ways to scale <i>graph databases</i> &longrightarrow;
+          <ul>
+            <li>Since machines now can come with lost of RAM, we can add enough RAM to the server so that the <i><b>working set of nodes and relashanships is held entirely in memory</b></i>. &longrightarrow; This technique is only helpful if the dataset that we are working with fit in a realistic amount of RAM.</li>
+            <li>We can improve the <i><b>read scaling</b></i> of the database by <i><b>adding more slaves with readonly access to the data, with all the writes going to the master</b></i>.</li>
+            <li>When the dataset size make <i>replication</i> impractical, we can <i><b>shard</b></i>.</li>
+            <li><i><b>Suitable use cases</b></i>
+              <ul>
+                <li>Connected data &longrightarrow; Any link-rich domain is well suited for graph databases.</li>
+                <li>Routing, Dispatch, and Location-Based Services</li>
+                <li>Recommendation Engines</li>
+              </ul>
+            </li>
+            <li><i><b>When not to use</b></i>
+              <ul>
+                <li>When we want to update all or subset of entities.</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        
+      </ul>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Schema migration</h2>
+
+      <ul>
+        <li><i>Databases</i> with <i><b>strong schemes</b></i>, such as <i><b>relational databases</b></i>, can be <i><b>migrated</b></i> by <i><b>saving</b></i> each <i><b>schema changes</b></i>, plus its <i><b>data migration</b></i>, in a <i><b>version-controlled sequence</b></i>.</li>
+        <li><i><b>Schemaless databases</b></i> still need careful <i>migration</i> due to the <i><b>implicit schema</b></i> in <i><b>any code that access the data</b></i>. &longrightarrow; <i><b>Schemaless databases</b></i> can use the <i><b>same migration techniques as databases with strong schemas</b></i>. &longrightarrow; <i><b>Schemaless databases</b></i> can also <i>read data</i> in a way that's <i>tolerant to changes</i> in the <i>data's implicit schema</i> and use <i>incremental migration to update data</i>.</li>
+      </ul>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Polyglot persistence</h2>
+
+      <ul>
+        <li>Different databases are designed to solve different problems. &longrightarrow; Using a <i>single database engine</i> for all the requiremetns usually leads to <i>non-performant solutions</i>.</li>
+        <li><i><b>Database engines</b></i> are designed to perform <i><b>certian operations</b></i> on <i><p>certain data structures</p></i> and <i><b>data amount</b></i>s very well. &longrightarrow; It is not necessary for the applicatoin to use a <i>single data store</i> for all of its needs, since <i>different databases</i> are built for <i>different purposes</i> and <i>not all problems can be elegantly solved by a single database</i>.</li>
+        <li><i><b>Polyglot programming</b></i> express the idea that applicatoins should be written in a mix of languages to take advantage of the fact that different languages are suitable for tackling different problems. &longrightarrow; Complex applications combine different types of problems, so picking the right language for each job may be more productive than trying to fit all aspects into a single language. &longrightarrow; <i><b>Polyglot persistence</b></i> &longrightarrow; Hybrid approach to persistence.</li>
+        <li>Encapsulating data access into services reduces the impact of data storage choices on other parts of the system.</li>
+        <li>Adding more data storage technologies increases complexity in programming and operations, so the advantages of a good data storage fit need to be weighed against this complexity.</li>
+      </ul>
+
+      <hr style="height: 2px; background: #333; border: none; border-radius: 4px;"> <!-- New Chapter -->
+
+      <h2>Beyond NoSQL</h2>
+
+      <ul>
+        <li>File systems
+          <ul>
+            <li>They don't advertise any interal structure, so they are more like <i>key-value stores</i> with a <i>hierarchic key</i></li>
+            <li>They provide little control over concurrency other than simple file locking. &longleftarrow; It is similar to the way NoSQL only provides locking within a single <i>aggregate</i>.</li>
+            <li>Files work very well for <i>sequential access</i>, such as <i>steaming</i>, which can be handy for data which is <i>append-only</i></li>
+            <li>File systems work best for a relatively <i>small number of large files</i> that can be processed in big chunks, perferably in a streaming style. &longrightarrow; <i>Large numbers of small files generally peform badly.</i></li>
+            <li>Fles provide no support for <i><b>queries</b></i> without additional indexing tools.</li>
+          </ul>
+        </li>
+        <li> Event sourcing 
+          <ul>
+
+          </ul>
+        </li>
       </ul>
 
     </div>
