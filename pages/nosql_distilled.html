@@ -645,7 +645,7 @@
       <h2>Beyond NoSQL</h2>
 
       <ul>
-        <li>File systems
+        <li><b>File systems</b>
           <ul>
             <li>They don't advertise any interal structure, so they are more like <i>key-value stores</i> with a <i>hierarchic key</i></li>
             <li>They provide little control over concurrency other than simple file locking. &longleftarrow; It is similar to the way NoSQL only provides locking within a single <i>aggregate</i>.</li>
@@ -654,12 +654,40 @@
             <li>Fles provide no support for <i><b>queries</b></i> without additional indexing tools.</li>
           </ul>
         </li>
-        <li> Event sourcing 
+        <li><b>Event Sourcing</b>
           <ul>
-
+            <li><i><b>Event sourcing</b></i> is an <i><b>approch</b></i> to <i><b>persistence</b></i> that <u>concentrate</u> on <i><b>persisting all the changes to a persistent state</b></i> <u>rather than</u> <i><b>persisting the current application state itself.</b></i> &longrightarrow; It's an <i><b>architectural pattern</b></i> &longrightarrow; <u>quite well with most persistence technologies</u>.</li>
+            <li>With an <i><b>event-sourced system</b></i>, the <u>first</u> step is to <i><u>constrcut an event object that captures the information about the change</u> &longrightarrow; This <i><b>event object</b> is <u>stored</u> in a <i><u>durable event log</u>. &longleftarrow; <u>Finally</u> we <i><b>process the event in order</b></i> to <i><b>update the applicaton's state</b></i></li>
+            <li>As consequence, in a an <i><u>event-sourced system</u></i> we <u>store</u> every <u>event</u> that' caused a <u>state change</u> of the system in the <i><b>event log</b></i>, and the <i><b>applicatoin state is entirely derivable from this event log</b></i>. &longrightarrow; At any time, we can safely throw away the applicaiton state adn rebuild the event log.</li>
+            <li>In theory, <i><b>event logs</b></i> are all we need <u>because we can always recreate the applicatoin state</u> whenever we need it by <u>replaying</u> the <u>event-log</u>. &longrightarrow; <i><b>In practice, this may be too slow</b></i>. &longrightarrow; As a result, it's usually best to provide the ability to store and recreate the <u>applicatoin state</u> in a <i><b>snapshot</b></i> &longrightarrow; A <i><b>snapshot</b></i> is designed to <u>persist</u> the <u>memory image</u> optimized for <u>rapid recovery of the state</u>. &longrightarrow; It is an <u>optimized aid</u>, os it should never take precedence over the <u>event log</u> for authority on the data. &longrightarrow; How frequently we take a <u>snapshot</u> depends on our <u>uptime needs</u>.</li>
+            <li>We can <i><b>broadcast events</b></i> to <u>multiple systems</u>, each of which can build a different applicatoin state for different purposes.</li>
+            <li><i><b>Event sourcing</b></i> is also an effective platform for analyzing <i><b>historical information</b></i></li>
+          </ul>
+        </li>
+        <li><b>Memory Image</b>
+          <ul>
+            <li>One of the consequences of <i><b>event sourcing</b></i> is that the <i><b>event log</b></i> becomes the <u>definitive persistent record</u>. &longrightarrow; But it is not necessary for the <i><b>applicaiton state</b></i> to be persistent. &longrightarrow; This opens up the option of keeping the <u>application state</u> in <u>memory</u> using only <u>in-memory data structures</u>. &longrightarrow; <u>Performance</u></li>
+          </ul>
+        </li>
+        <li><b>Version Control</b>
+          <ul>
+            <li>Version controll allows many people on a team to coordinate their modifications of a complex interconnected system, with the ability to explore <u>past states</u> of that system and alternative realities through <u>branching</u>.</li>
+            <li><u>Version control</u> systems are built on top of the <u>file system</u>s &longrightarrow; They are not designed for applicatoin data storage, so are awkward to use in that context. &longrightarrow; They worth considering for scenarios where their <u>timeline capabilites are useful.</u></li>
+          </ul>
+        </li>
+        <li><b>XML Databases</b>
+          <ul>
+            <li>Run queries with <u>XPath</u> and <u>XQuery</u></li>
+          </ul>
+        </li>
+        <li><b>Object Databases</b>
+          <ul>
+            <li>When <u>object-oriented programming</u> started its rise in popularity, there was a flurry of interest in <i><b>object-oriented databases</b></i>. &longrightarrow; The focurs here was the complexity of <u>mapping from in-memory data structures to relational tables</u>. &longrightarrow; The idea of an object-oriented database is that we avoid this complexity. &longrightarrow; The database would automatically manage the storage of <u>in-memory</u> structures onto <u>disk</u>. &longrightarrow; We could think of it as a persistent virtual memory system, allowing us to program with persistence yet without <i>taking any notice of a database at all</i>. &longrightarrow; Close integration with the applicaiton.</li>
           </ul>
         </li>
       </ul>
+
+      <p><b>*</b> NoSQL is just one set of data storage technologies. &longrightarrow; As they increase comfort with <u>polyglot persistence</u>, we should consider other data storage technologies.</p>
 
     </div>
   </div>
