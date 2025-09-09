@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="NoSQL Distilled post"/>
+  <title>NoSQL Distilled</title>
+
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #edede9;
+      color: #333;
+    }
+
+    .post-wrapper {
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #0D7C66;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+
+    .post-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #56806A;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .post-meta {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .post-content p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .post-wrapper {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .post-content p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="post-wrapper">
+    <a class="back-link" href="../index.html">&larr; Back to blog</a>
+    
+    <img src="../images/redis.webp" alt="Template Image alt" class="post-image" />
+    
+    <h1>Redis</h1>
+    <div class="post-meta">Posted on September 08, 2025 | In: Redis <hr></div>
+
+    <div class="post-content">
+
+      <ul> 
+        <li><b>Redis</b>
+          <ul>
+            <li>In memory database</li>
+            <li>Non-Relational databaes (NoSQL) &longrightarrow; <i>key-value</i></li>
+            <li>Support
+              <ul>
+                <li><b>Replication</b> &longrightarrow; Scale <i>read performance</i></li>
+                <li>client side <b>sharding</b> &longrightarrow; Scale <b>write</b> performance</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <hr>
+
+      <ul>
+        <li><i>Redis</i> allow us to <i>store</i> <i><b>key</b>s</i> that <i><b>map</b></i> to <i>any one of</i> <i><b>five</b></i> different <i><b>data structur</b> types</i>
+          <ul>
+            <li><b>STRING</b>
+              <ul>
+                <li>Content: <i><u>string</u></i>s, <i><u>integer</u></i>s, <i><u>floating point</u></i></li>
+                <li>Commands:
+                  <ul>
+                    <li><b>GET</b> &LongRightArrow; Fetch the data at the given <i>key</i></li>
+                    <li><b>SET</b> &longrightarrow; Sets the value stored at the given <i>key</i></li>
+                    <li><b>DEL</b> &longrightarrow; Deletes the value stored at the given <i>key</i></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><b>LIST</b>
+              <ul>
+                <li>Content: <i>linked <u>list</u></i> of <i><u>string</u></i>s</li>
+                <il>Commands:
+                  <ul>
+                    <li><b>RPUSH</b> &longrightarrow; Pushes the value onto the right end of the list</li>
+                    <li><b>LRANGE</b> &longrightarrow; Fetches a range of values from the list</li>
+                    <li><b>LINDEX</b> &longrightarrow; Fetches an item at a given position in the list</li>
+                    <li><b>LPOP</b> &longrightarrow; Pops the value from the left end of the list and return it</li>
+                  </ul>
+                </il>
+              </ul>
+            </li>
+            <li><b>SET</b>
+              <ul>
+                <li>Content: <b><i>Unordered</i></b> <i><u>collection</u></i> of <i><u>string</u></i>s</li>
+                <li>Points:
+                  <ul>
+                    <li>Because redis <i><b>SET</b></i> are <i><b>unordered</b></i> and <i><b>unique</b></i> we <u>can not</u> <i>pop</i> and <i>push</i> items from the <i>ends</i> like we did with <b><i>LIST</i></b>s. &longrightarrow; instead we <i>add</i> or <i>remove</i> items <i><b>by values</b></i></li>
+                  </ul>
+                </li>
+                <li>Commands:
+                  <ul>
+                    <li><b>SADD</b> &longrightarrow; Add item to the set</li>
+                    <li><b>SMEMBERS</b> &longrightarrow; Returns the <i>entire</i> <i>set</i> of items</li>
+                    <li><b>SISMEMBER</b> &longrightarrow; Check if an item is in the set</li>
+                    <li><b>SREM</b> &longrightarrow; Removes the item from the set, if exists</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><b>HASH</b>
+              <ul>
+                <li>Content: <i><b>Unordered</b></i> <i><u>hash table</u></i> of <i><u>key</u>s to <u>value</u>s</i></li>
+                <li>
+                  <ul>Points:
+                    <li>Miniature versions of Redis</li>
+                  </ul>
+                </li>
+                <li>Commands:
+                  <ul>
+                    <li><b>HSET</b> &longrightarrow; Stores the <i>value</i> at the <i>key</i> in the hash</li>
+                    <li><b>HGET</b> &longrightarrow; Fetches the <i>value</i> at the given <i>hash key</i></li>
+                    <li><b>HGETALL</b> &longrightarrow; Fetches the entire hash</li>
+                    <li><b>HDEL</b> &longrightarrow; Removes a <i>key</i> from the <i>hash</i>, if it exists</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><b>ZSET</b>
+              <ul>
+                <li>Content: <i><b>Ordered</b></i> mapping of <i><u>string</u>s</i> to <i><u>floating-point</u> <b>score</b>s</i> &longrightarrow; <i>ordered by score</ i></li>
+                <li>Points:
+                  <ul>
+                    <li>The <i>key</i>s(<i>memeber</i>s) are <i><b>unique</b></i> and <i><b>value</b>s</i> are <i>limited</i> to <i><b><u>floating-point</u></b></i> numbers.</li>
+                    <li>ZSET keep items <i><b><u>orderd</u></b></i> <i>by</i> the item <i><b>score</b></i> &longrightarrow; ZSETs are <i>sorted</i> in <i><b>ascending</b> order by their <i><b>score</b></i>.</li>
+                  </ul>
+                </li>
+                <li>Commands:
+                  <ul>
+                    <li><b>ZADD</b> &longrightarrow; </li>
+                    <li><b>ZRANGE</b> &longrightarrow; </li>
+                    <li><b>ZRANGEBYSCORE</b> &longrightarrow; </li>
+                    <li><b>ZREM</b> &longrightarrow; </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      
+
+    </div>
+  </div>
+
+</body>
+</html>
