@@ -97,8 +97,16 @@
       <ul> 
         <li><b>Redis</b>
           <ul>
-            <li>In memory database</li>
+            <li>In memory database &longrightarrow; Fast</li>
             <li>Non-Relational databaes (NoSQL) &longrightarrow; <i>key-value</i></li>
+            <li>Remote &longrightarrow; Making it accessible to <i>multiple</i> <i>client/servers</i></li>
+            <li>Persistent &longrightarrow; The <i>opportunity</i> to keep data between <i>reboot</i>s.</li>
+            <li>Scaleable
+              <ul>
+                <li>Sharding</li>
+                <li>Slaving</li>
+              </ul>
+            </li>
             <li>Support
               <ul>
                 <li><b>Replication</b> &longrightarrow; Scale <i>read performance</i></li>
@@ -171,6 +179,7 @@
                     <li><b>HGET</b> &longrightarrow; Fetches the <i>value</i> at the given <i>hash key</i></li>
                     <li><b>HGETALL</b> &longrightarrow; Fetches the entire hash</li>
                     <li><b>HDEL</b> &longrightarrow; Removes a <i>key</i> from the <i>hash</i>, if it exists</li>
+                    <li><b>HINCRBY</b> &longrightarrow; <i>Increments</i> a <i>value</i> in a <i>hash</i></li>
                   </ul>
                 </li>
               </ul>
@@ -186,10 +195,11 @@
                 </li>
                 <li>Commands:
                   <ul>
-                    <li><b>ZADD</b> &longrightarrow; </li>
-                    <li><b>ZRANGE</b> &longrightarrow; </li>
-                    <li><b>ZRANGEBYSCORE</b> &longrightarrow; </li>
-                    <li><b>ZREM</b> &longrightarrow; </li>
+                    <li><b>ZADD</b> &longrightarrow; Add <i><b>member</b></i> with the given <i><b>score</b></i> to the <i><b>ZSET</b></i></li>
+                    <li><b>ZRANGE</b> &longrightarrow; Fetch the items in the ZSET from their positions in sorted order</li>
+                    <li><b>ZRANGEBYSCORE</b> (<i>asc</i>), <b>ZREVRANGEBYSCORE</b> (<i>desc</i>) &longrightarrow; Fetch items in the ZSET based on a range of scores</li>
+                    <li><b>ZREM</b> &longrightarrow; Remove the item from the ZSET, if it exists</li>
+                    <li><b>ZINCRBY</b> &longrightarrow; <i>Increment</i> the <i>score</i> of the <i>member</i>.</li>
                   </ul>
                 </li>
               </ul>
@@ -198,6 +208,25 @@
         </li>
       </ul>
       
+      <ul>
+        <li>General Points
+          <ul>
+            <li><i>Seprator</i> between parts of the <i>names</i> &ShortRightArrow; The choice is <i>subjective</i> &ShortRightArrow; <b>:</b> is common among redis users &ShortRightArrow; Other options <b>. / |</b></li>
+            <li>The ensure that <b><i>SET</i></b> we'll give it an <i><b>expiration</b></i> time with <b>EXPIRE</b> command, which lets Redis automatically <i>delete</i> it.</li>
+            <li>As matter of keeping the syntax of commands simple, Redis <i>doesn't</i> allow nested structures &longrightarrow; If necessary, we can user <i>key names</i> for this &ShortRightArrow; or &ShortRightArrow; We can explicitly store our nested structures using <i>JSON</i> or some other serialization library of our choice.</li>
+            <li>Redis has the capability to perform operations involving <i>multiple</i> <b>SET</b>s. and &ShortRightArrow; in some cases, between <b>SET</b>s and <b>ZSET</b>s.</li>
+            <li>Some examples of using Redis
+              <ul>
+                <li>Login and cookie caching</li>
+                <li>Sopping carts</li>
+                <li>Web page caching</li>
+                <li>Database row caching</li>
+                <li>Web page analytics</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
     </div>
   </div>
