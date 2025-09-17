@@ -124,12 +124,54 @@
           <ul>
             <li><b>STRING</b>
               <ul>
-                <li>Content: <i><u>string</u></i>s, <i><u>integer</u></i>s, <i><u>floating point</u></i></li>
+                <li>Content: <i><u>string</u></i>s, <i><u>integer</u></i>s, <i><u>floating point</u></i>
+                  <ul>
+                    <li>Byte string</li>
+                    <li>Integer (Can be incremented or decremented by an arbitrary numeric)
+                      <ul>
+                        <li>Integers turning into floats as neccessary.</li>
+                        <li>Integers have ranges that are equivalent to the platform's <i>long integer</i> &longrightarrow; In 32 bit system 32 bit &longrightarrow; In 64 bit system 64 bit</li>
+                      </ul>
+                    </li>
+                    <li>Floating-point (Can be incremented or decremented by an arbitrary numeric)
+                      <ul>
+                        <li>Floats have ranges and values limited to <i>IEEE 754</i> floating-point doubles.</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>Points:
+                  <ul>
+                    <li></li>
+                  </ul>
+                </li>
                 <li>Commands:
                   <ul>
                     <li><b>GET</b> &LongRightArrow; Fetch the data at the given <i>key</i></li>
                     <li><b>SET</b> &longrightarrow; Sets the value stored at the given <i>key</i></li>
                     <li><b>DEL</b> &longrightarrow; Deletes the value stored at the given <i>key</i></li>
+                    <li><b>INCR</b> &longrightarrow; Increment the value stored at the <i>key</i> by <b>1</b>
+                      <ul>
+                        <li><i>INCR*</i> or <i>DECR*</i> &longrightarrow; Key that doesn't exist, Key's value is empty string &longrightarrow; Redis will operate as though that key's value were <i>zero</i></li>
+                        <li><i>INCR*</i> or <i>DECR*</i> &longrightarrow; Value can not be interpreted as an <i>integer</i> or <i>float</i> &longrightarrow; We will receive an error.</li>
+                      </ul>
+                    </li>
+                    <li><b>DECR</b> &longleftarrow; Decrement the value stored at the key by <b>1</b></li>
+                    <li><b>INCRBY</b> &longrightarrow; Increment the value stored at the <i>key</i> by the provided <i>integer</i> value</li>
+                    <li><b>DECRBY</b> &longrightarrow; Decrement the value stored at the <i>key</i> by the provided <i>integer</i> value</li>
+                    <li><b>INCRBYFLOAT</b> &longrightarrow; Increment the value stored at the <i>key</i> by the provided <i>float</i> value</li>
+                    <li><b>APPEND</b> &longrightarrow; Concatenates the provided value to the <i>string</i> already stored at the given <i>key</i>
+                      <ul>
+                        <li>When reading <i><b>STRING</b></i>s with <i><b>GETRANGE</b></i>, any request for data beyond the end of the <i><b>STRING</b></i> won't be returned</li>
+                        <li>When reading <i>bit</i>s with <i><b>GETBIT</b></i>, any <i>bit</i> beyond the end of the <i><b>STRING</b></i> is considered <i><b>zero</b></i></li>
+                      </ul>
+                    </li>
+                    <li><b>GETRANGE</b> &longrightarrow; Fetches the substring, including all characters from the <i>start offset</i> to the <i>end offset</i>, <i>inclusive</i></li>
+                    <li><b>SETRANGE</b> &longrightarrow; Sets the substring starting at the provided offset to the given value</li>
+                    <li><b>GETBIT</b> &longrightarrow; <i>Treats the <b>byte string</b></i> as a <i><b>bit string</b></i>, and <i>return the value</i> of the bit in the string at the provided bit <i>offset</i></li>
+                    <li><b>SETBIT</b> &longrightarrow; Treats the byte string as a bit string, adn sets the value of the bit in the string at the provided <i><b>bit offset</b></i></li>
+                    <li><b>BITCOUNT</b> &longrightarrow; Counts the number of <i><b>1 bits</b></i> in the string, optionally starting and finishing at the provided <i><b>byte offset</b></i>s</li>
+                    <li><b>BITOP</b> &longrightarrow; Performs ne of the <i><b>bitwise</b> operations</i>, <b><i>AND</i></b>, <b><i>OR</i></b>, <b><i>XOR</i></b> or <b><i>NOT</i></b>, on the strings provided, storing the result in the destination key</li>
                   </ul>
                 </li>
               </ul>
@@ -143,6 +185,17 @@
                     <li><b>LRANGE</b> &longrightarrow; Fetches a range of values from the list</li>
                     <li><b>LINDEX</b> &longrightarrow; Fetches an item at a given position in the list</li>
                     <li><b>LPOP</b> &longrightarrow; Pops the value from the left end of the list and return it</li>
+                    <li><b>RPUSH</b> &longrightarrow; Return the value(s) onto the right end of the list</li>
+                    <li><b>LPUSH</b> &longrightarrow; Pushes the values(s) onto the left end of the list</li>
+                    <li><b>RPOP</b> &longrightarrow; <i><b>Remove and return</b></i> the rightmost item from the list</li>
+                    <li><b>LPOP</b> &longrightarrow; <i><b>Remove and return</b></i> the leftmost item from the list</li>
+                    <li><b>LINDEX</b> &longrightarrow; <i><b>Return</b></i> the item at the given offest</li>
+                    <li><b>LRANGE</b> &longrightarrow; <i><b>Return</b></i> the items in the list at the offests from start to end, inclusive</li>
+                    <li><b>LTRIM</b> &longrightarrow; Trim the list to only include items at indices between start and end, inclusive</li>
+                    <li><b>RPOPLPUSH</b> &longrightarrow; Pops the rightmost item from the source and <b>LPUSH</b>es the item to the destination, also returning the item to the user</li>
+                    <li><b>BLPOP</b> &longrightarrow; Pops the leftmost item from the first <i>non-empty</i> <b>LIST</b>, or <i>waits the timeout in seconds for an item</i></li>
+                    <li><b>BRPOP</b> &longrightarrow; Pops the rightmost item from the source and <b>LPUSH</b>es the item to the destination, also returning the item to the user</li>
+                    <li><b>BRPOPLPUSH</b> &longrightarrow;Pops the rightmost item from the source and <b>LPUSH</b>es the item to the destination, also returning the item to the user, and waiting up to the timout if the source is empty</li>
                   </ul>
                 </il>
               </ul>
@@ -161,6 +214,17 @@
                     <li><b>SMEMBERS</b> &longrightarrow; Returns the <i>entire</i> <i>set</i> of items</li>
                     <li><b>SISMEMBER</b> &longrightarrow; Check if an item is in the set</li>
                     <li><b>SREM</b> &longrightarrow; Removes the item from the set, if exists</li>
+                    <li><b>SCARD</b> &longrightarrow; Returns whether the item is in the <b><i>SET</i></b></li>
+                    <li><b>SRANDMEMBERS</b> &longrightarrow; Return one or more random items from the <b><i>SET</i></b>. When <i>count is positive</i>, Redis will return &longrightarrow; <i>distinct randomly</i> chosen items, and when &longrightarrow; count is negative, Redis will return &longrightarrow; randomly chosen items that <i>may not be distinct</i></li>
+                    <li><b>SPOP</b> &longrightarrow; <b><i>Removes and return</i></b> a <b><i>random</i></b> item from the <i>SET</i></li>
+                    <li><b>SMOVE</b> &longrightarrow; If the item is in the source, <b><i>remove</i></b>s the item from the source and adds it to the destination, <i><b>returning if the item was moved</b></i></li>
+                    <li><b>SDIFF</b> &longrightarrow; Returns the items in the <i>first SET</i> that weren't in any of the <i>other SET</i>s</li>
+                    <li><b>SDIFFSTORE</b> &longrightarrow; <i>Store</i>s at the <i>dest-key</i> the items in the <i>first SET</i> that weren't in any of the other <i>SET</i>s</li>
+                    <li><b>SINTER</b> &longrightarrow; <i>Return</i>s the items that are in <i>all</i> f the SETs</li>
+                    <li><b>SINTERSTORE</b> &longrightarrow; <i>Store</i>s at the <i>dest-key</i> the items that are in <i>all</i> of the <i>SET</i>s</li>
+                    <li><b>SUNION</b> &longrightarrow; <i>Return</i>s the items that are in <i>at least one of</i> the <i>SET</i>s</li>
+                    <li><b>SUNIONSTORE</b> &longrightarrow; <i>Store</i>s at the <i>dest-key</i> the itmes that are in at least one of the <i>SET</i>s</li>
+
                   </ul>
                 </li>
               </ul>
