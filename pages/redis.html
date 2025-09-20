@@ -244,6 +244,13 @@
                     <li><b>HGETALL</b> &longrightarrow; Fetches the entire hash</li>
                     <li><b>HDEL</b> &longrightarrow; Removes a <i>key</i> from the <i>hash</i>, if it exists</li>
                     <li><b>HINCRBY</b> &longrightarrow; <i>Increments</i> a <i>value</i> in a <i>hash</i></li>
+                    <li><b>HMGET</b> &longrightarrow; Fetches the <i>values</i> at the <i>fileds</i> in the HASH</li>
+                    <li><b>HMSET</b> &longrightarrow; Sets the values of the fields in the HASH</li>
+                    <li><b>HLEN</b> &longrightarrow; Returns the number of key-value pairs in the HASH</li>
+                    <li><b>HEXISTS</b> &longrightarrow; Returns whether the given key exists in the HASH</li>
+                    <li><b>HKEYS</b> &longrightarrow; Fetches the keys in the HASH</li>
+                    <li><b>HVALS</b> &longrightarrow; Fetches the values in the HASH</li>
+                    <li><b>HINCRBYFLOAT</b> &longrightarrow; Increments the value stored at the given key by the float increment</li>
                   </ul>
                 </li>
               </ul>
@@ -264,6 +271,18 @@
                     <li><b>ZRANGEBYSCORE</b> (<i>asc</i>), <b>ZREVRANGEBYSCORE</b> (<i>desc</i>) &longrightarrow; Fetch items in the ZSET based on a range of scores</li>
                     <li><b>ZREM</b> &longrightarrow; Remove the item from the ZSET, if it exists</li>
                     <li><b>ZINCRBY</b> &longrightarrow; <i>Increment</i> the <i>score</i> of the <i>member</i>.</li>
+                    <li><b>ZCARD</b> &longrightarrow; The number of memebers in the ZSET</li>
+                    <li><b>ZCOUNT</b> &longrightarrow; Return the number of members with scores between the provided minimum and maximum</li>
+                    <li><b>ZRANK</b> &longrightarrow; Returns the position of the given member in the ZSET</li>
+                    <li><b>ZSCORE</b> &longrightarrow; Returns the score of the member in the ZSET</li>
+                    <li><b>ZRANGE</b> &longrightarrow; Returns the members and optionally the scores for the memebers with ranks between start and stop</li>
+                    <li><b>ZREVRANK</b> &longrightarrow; Returns the position of the member in the ZSET, with members ordered in reverse</li>
+                    <li><b>ZREVRANGE</b> &longrightarrow; Fetches the given members from the ZSET by rank, with members in reverse orders</li>
+                    <li><b>ZRANGEBYSCORE</b> &longrightarrow; Fetches the members in revers order between min and max</li>
+                    <li><b>ZREMRANGEBYRANK</b> &longrightarrow; Removes the items from the ZSET with ranks between start and stop</li>
+                    <li><b>ZREMRANGEBYSCORE</b> &longrightarrow; Removes the items from the ZSET with scores between min and max</li>
+                    <li><b>ZINTERSCORE</b> &longrightarrow; Performs a SET-like intersection of the provided ZSETs</li>
+                    <li><b>ZUIONSTORE</b> &longrightarrow; Performs a SET-like union of the provided ZSETs</li>
                   </ul>
                 </li>
               </ul>
@@ -272,22 +291,65 @@
         </li>
       </ul>
       
+<hr>
+      <ul>
+        <li><b>Publish/Subscribe</b>
+          <ul>
+            <li>Description
+              <ul>
+                <li><b><i>Real-time</i></b> &longrightarrow; Acts as middleman, routing messages from publisher to subscriber</li>
+                <li><b><i>Fire-and-forget</i></b> &longrightarrow; If no one is listening when a message is published, the message is lost</li>
+                <li><b><i>No message persistance</i></b> &longrightarrow; Messgaes are not stored</li>
+                <li><b><i>Light weight and fast</i></b> &longrightarrow; Good for low-latency notificatoins</li>
+                <li><b><i>No built-in acknoledgement, retry, queeing</i></b></li>
+                <li><b><i>Scale poorly across multiple severs without extra setup</i></b></li>
+                <li>Anyone listening too given channel will receive all messages sent to that channel while they're connected and listening.</li>
+                <li>Listeners can also subscrible to the <i>message patterns</i></li>
+              </ul>
+            </li>
+            <li>Points
+              <ul>
+                <li>If we like the simplicity of using PUBLISH/SUBSCRIBE, and we're okay with the chance that we may lose a little data, then feel free to use pub/sub &longrightarrow; <i>client-output-buffer-limit pubsub</i> reasonably before starting</li>
+              </ul>
+            </li>
+            <li>Commands
+                <ul>
+                  <li><b>SUBSCRIBE</b> &longrightarrow; Subscribes to the given channels</li>
+                  <li><b>UNSUBSCRIBE</b> &longrightarrow; Unsubscribe from the provided channels &longrightarrow; Unsubscribe all channels if no channel is given</li>
+                  <li><b>PUBLISH</b> &longrightarrow; Publish messages to he given channel</li>
+                  <li><b>PSUBSCRIBE</b> &longrightarrow; Subscribes to messages broadcast to channels that match the given pattern</li>
+                  <li><b>PUNSUBSCRIBE</b> &longrightarrow; Unsubscribe from the provided pattern, or unsubscribe from all subscribed patterns if none are given</li>
+                </ul>
+              </li>
+          </ul>
+        </li>
+      </ul>
+<hr>
+      <ul>
+        <li><b>Redis transaction</b>s</li>
+      </ul>
+<hr>
+
       <ul>
         <li>General Points
           <ul>
-            <li><i>Seprator</i> between parts of the <i>names</i> &ShortRightArrow; The choice is <i>subjective</i> &ShortRightArrow; <b>:</b> is common among redis users &ShortRightArrow; Other options <b>. / |</b></li>
-            <li>The ensure that <b><i>SET</i></b> we'll give it an <i><b>expiration</b></i> time with <b>EXPIRE</b> command, which lets Redis automatically <i>delete</i> it.</li>
-            <li>As matter of keeping the syntax of commands simple, Redis <i>doesn't</i> allow nested structures &longrightarrow; If necessary, we can user <i>key names</i> for this &ShortRightArrow; or &ShortRightArrow; We can explicitly store our nested structures using <i>JSON</i> or some other serialization library of our choice.</li>
-            <li>Redis has the capability to perform operations involving <i>multiple</i> <b>SET</b>s. and &ShortRightArrow; in some cases, between <b>SET</b>s and <b>ZSET</b>s.</li>
-            <li>Some examples of using Redis
+            <li>Points:
               <ul>
-                <li>Login and cookie caching</li>
-                <li>Sopping carts</li>
-                <li>Web page caching</li>
-                <li>Database row caching</li>
-                <li>Web page analytics</li>
+                <li><i>Seprator</i> between parts of the <i>names</i> &ShortRightArrow; The choice is <i>subjective</i> &ShortRightArrow; <b>:</b> is common among redis users &ShortRightArrow; Other options <b>. / |</b></li>
+                <li>The ensure that <b><i>SET</i></b> we'll give it an <i><b>expiration</b></i> time with <b>EXPIRE</b> command, which lets Redis automatically <i>delete</i> it.</li>
+                <li>As matter of keeping the syntax of commands simple, Redis <i>doesn't</i> allow nested structures &longrightarrow; If necessary, we can user <i>key names</i> for this &ShortRightArrow; or &ShortRightArrow; We can explicitly store our nested structures using <i>JSON</i> or some other serialization library of our choice.</li>
+                <li>Redis has the capability to perform operations involving <i>multiple</i> <b>SET</b>s. and &ShortRightArrow; in some cases, between <b>SET</b>s and <b>ZSET</b>s.</li>
+                <li>Some examples of using Redis
+                  <ul>
+                    <li>Login and cookie caching</li>
+                    <li>Sopping carts</li>
+                    <li>Web page caching</li>
+                    <li>Database row caching</li>
+                    <li>Web page analytics</li>
+                  </ul>
+                </li>
               </ul>
-            </li>
+            </li>      
           </ul>
         </li>
       </ul>
