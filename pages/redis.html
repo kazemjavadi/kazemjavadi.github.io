@@ -326,7 +326,53 @@
       </ul>
 <hr>
       <ul>
-        <li><b>Redis transaction</b>s</li>
+        <li><b>Redis transaction</b> &longrightarrow; For operations involving <b><i>multiple keys (same or different types)</i></b> &longrightarrow; Redis have <i>five</i> <i>commands</i> that help us operate on <b><i>multiple keys</i></b> <i>without interruption</i>
+          <ul>
+            <li><b>WATCH</b> &LongRightArrow; </li>
+            <li><b>MULTI/EXEC</b> &LongRightArrow; 
+              <ul>
+                <li>Basic transaction</li>
+                <li>One client execute multiple commands without other clients being able to interupt them
+                  <ul>
+                    <li>This isn't the same as a relational database transaction &longrightarrow; which can be <i>executed partially</i>, and then <i>rolled back</i> or <i>committed</i></li>
+                  </ul>
+                </li>
+                <li>Every command passed as part of <b><i>MULTI/EXEC</i></b> <i>transaction</i> is executed &longrightarrow; <i><b>one after another until they've completed</b></i> &longrightarrow; <i><b>After</b> they've completed</i> &longrightarrow; <i><b>Other clients may execute their commands</b></i></li>
+                <li>To <i>perform a <b>transacion</b></i> in Redis, we <i><b>first</b></i> call <b>MULTI</b>, <i><b>followed</b></i> by <b>EXEC</b> &longrightarrow; When seeing <b>MULTI</b> <i>Redis</i> will <i><b>queue</b> up <b>commands</b></i> from the <i><b>same connection</b></i> until it sees the <b>EXEC</b> &longrightarrow; at which point Redis will <i>execute</i> &longrightarrow; <i><b>queued commands sequentially without interruption</b></i></li>
+              </ul>
+            </li>
+            <li><b>UWATCH</b> &LongRightArrow; </li>
+            <li><b>DISCARD</b> &LongRightArrow; </li>
+          </ul>
+        </li>
+        <li> Pros & Cons
+          <ul>
+            <li>Primary purpose &longrightarrow; <b>MULTI/EXEC</b> transaction is <i>removing</i> what are known as <i><b>race condition</b>s</i></li>
+            <li>Secondary purpose &longrightarrow; Using <i><b>pipeline</b>s</i> in Redis is to <i><b>improve performance</b></i> &longrightarrow; In particular, by <i><b>reducing the number of round trips between Reids and our client</b></i> &longrightarrow; Signifacantly <i>reduce</i> the amount of time our <i>client</i> is waiting for a <i>response</i></li>
+          </ul>
+        </li>
+      </ul>
+<hr>
+      <ul>
+        <li><b>Expiring keys</b>
+          <ul>
+            <li>We can <i>remove</i> the <i>data</i> <i>explicitly</i> with <b>DEL</b> <i>command</i> or we can to <i>remove</i> an entire <i><b>key</b></i> after <i><b>specific timeout (expiration)</b></i></li>
+            <li>Having <i><b>key</b>s</i> that will <i><b>expire</b></i> after a <i>certain amount of time</i> can be useful to handle the <i>cleanup of cached data</i></li>
+            <li>With <i>containers</i> (<b>LIST</b>, <b>SET</b>, <b>HASH</b>, <b>ZSET</b>) &LongRightArrow; we can <i><b>only expire entire key</b></i> &longrightarrow; <i><b>not individual items</b></i></li>
+            <li>We'll be able to use <i>expiration</i> as a way of <i>keeping Redis memory use low</i></li>
+            <li>Commands
+              <ul>
+                <li><b>PERSIST</b> &longrightarrow; Remove the expiration from a key</li>
+                <li><b>TTL</b> &longrightarrow; Returns the amount of time remaining before a key will expire</li>
+                <li><b>EXPIRE</b> &longrightarrow; Sets the key to expire in the given number of seconds</li>
+                <li><b>EXPIREAT</b> &longrightarrow; Sets the expiration time as the given Unix timestamp</li>
+                <li><b>PTTL</b> &longrightarrow; Returns the number of milliseconds before the key will expire</li>
+                <li><b>PEXPIRE</b> &longrightarrow; Sets the key to expire in the given number of milliseconds</li>
+                <li><b>PEXPIREAT</b> &longrightarrow; Sets the expiration time to be the given Unix timestamp specified in milliseconds</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
 <hr>
 
